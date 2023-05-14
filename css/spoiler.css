@@ -1,15 +1,13 @@
 .spoiler {
     margin: 5px 0;
     padding: 0 15px;
-    border: 0px solid #E5E5E5;
     position: relative;
     clear: both;
     border-radius: 3px;
 }
 
 .spoiler .spoiler-title {
-    background: rgba(255,0,0,0);
-    opacity: 1;
+    background: #00283a;
     margin: 0 -15px;
     padding: 5px 15px;
     color: #dedee0;
@@ -24,11 +22,11 @@
 }
 
 .spoiler.collapsed .spoiler-title:before {
-    content: "";/*show here*/
+    content: "展开 ";
 }
 
 .spoiler.expanded .spoiler-title:before {
-    content: "";/*hide here*/
+    content: "收起 ";
 }
 
 .spoiler .spoiler-content {
