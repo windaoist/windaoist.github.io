@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="之前暑假自学python时突发奇想写出来的东西而已基本的iching函数（将1和0转化为64卦)： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实现简单的卜筮方法">
+<meta property="og:url" content="https://test.iqimi.top/2022/09/09/python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%9C%E7%AD%AE%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="无名小传">
+<meta property="og:description" content="之前暑假自学python时突发奇想写出来的东西而已基本的iching函数（将1和0转化为64卦)： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798">
+<meta property="og:locale">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="article:published_time" content="2022-09-09T14:01:00.000Z">
+<meta property="article:modified_time" content="2022-11-27T01:54:51.556Z">
+<meta property="article:author" content="无名小卒">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://test.iqimi.top/img/404.jpg">
+
+
+<title >python实现简单的卜筮方法</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"test.iqimi.top","author":"无名小卒","root":"/","typed_text":null,"theme_version":"2.0.9","theme":{"switch":true,"default":"style-dark"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://cdn.jsdelivr.net/npm/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2022-11-27 09:54:51"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            无名<span>小传</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            python实现简单的卜筮方法
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2022
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        无名小卒
+    </h5>
+    
+</div>
+<!-- card header end -->
+        <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+        <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                不知何处
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                City:
+            </div>
+            <div class="trm-label trm-label-light">
+                徐扬之地
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                ？
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+        
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:qimi285714@outlook.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            09/09
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            22:01
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            无名小卒
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <p><img src="/2022/09/09/python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E5%8D%9C%E7%AD%AE%E6%96%B9%E6%B3%95/Duality1.png" alt="Duality" title="泰拉瑞亚1.4.4新增画作《二元性》（Duality）" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'><br>之前暑假自学python时突发奇想写出来的东西而已<br>基本的iching函数（将1和0转化为64卦)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">iching</span>(<span class="params"><span class="built_in">str</span></span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;将数字转化为六十四卦&#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">str</span>==<span class="string">&#x27;111111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;乾䷀&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;坤䷁&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;屯䷂&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;蒙䷃&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>== <span class="string">&#x27;010111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;需䷄&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;讼䷅&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;师䷆&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;比䷇&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;小蓄䷈&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;履䷉&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;泰䷊&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;否䷋&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;同人䷌&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;大有䷍&#x27;</span> </span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span><span class="string">&#x27;谦䷎&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;豫䷏&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;随䷐&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;蛊䷑&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;临䷒&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;观䷓&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;噬嗑䷔&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;贲䷕&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;剥䷖&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;复䷗&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;无妄䷘&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;大蓄䷙&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;颐䷚&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;大过䷛&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;坎䷜&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;离䷝&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;咸䷞&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;恒䷟&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;遁䷠&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;大壮䷡&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;晋䷢&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;明夷&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;家人䷤&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;睽䷥&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;蹇䷦&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;解䷧&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;损䷨&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;益䷩&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011111&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;夬䷪&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;111110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;姤䷫&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011000&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;萃䷬&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;000110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;升䷭&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;困䷮&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;井䷯&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;革䷰&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;鼎䷱&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001001&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;震䷲&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;100100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;艮䷳&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;渐䷴&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;归妹䷵&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;丰䷶&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;旅䷷&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110110&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;巽䷸&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;011011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;兑䷹&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;涣䷺&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;节䷻&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;110011&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;中孚䷼&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;001100&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;小过䷽&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;010101&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;既济䷾&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">str</span>==<span class="string">&#x27;101010&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;未济䷿&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>1.硬币筮法：<br>用三个铜钱抛掷，根据结果判断爻型。</p>
+<ul>
+<li>两个面一个背为少阳。</li>
+<li>两个背一个面为少阴。</li>
+<li>三个背为老阳。</li>
+<li>三个面为老阴。<br>如此抛掷六次即可得到六爻。无变爻看本卦卦辞，一个变爻看变爻爻辞，两个以上变爻看本卦卦辞。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">bagua1=&#123;<span class="string">&#x27;乾&#x27;</span>:<span class="string">&#x27;111&#x27;</span>,<span class="string">&#x27;坤&#x27;</span>:<span class="string">&#x27;000&#x27;</span>,<span class="string">&#x27;坎&#x27;</span>:<span class="string">&#x27;010&#x27;</span>,<span class="string">&#x27;离&#x27;</span>:<span class="string">&#x27;101&#x27;</span>,<span class="string">&#x27;巽&#x27;</span>:<span class="string">&#x27;110&#x27;</span>,<span class="string">&#x27;兑&#x27;</span>:<span class="string">&#x27;011&#x27;</span>,<span class="string">&#x27;震&#x27;</span>:<span class="string">&#x27;001&#x27;</span>,<span class="string">&#x27;艮&#x27;</span>:<span class="string">&#x27;100&#x27;</span>&#125;</span><br><span class="line">bagua2=&#123;<span class="string">&#x27;111&#x27;</span>:<span class="string">&#x27;乾&#x27;</span>,<span class="string">&#x27;000&#x27;</span>:<span class="string">&#x27;坤&#x27;</span>,<span class="string">&#x27;010&#x27;</span>:<span class="string">&#x27;坎&#x27;</span>,<span class="string">&#x27;101&#x27;</span>:<span class="string">&#x27;离&#x27;</span>,<span class="string">&#x27;110&#x27;</span>:<span class="string">&#x27;巽&#x27;</span>,<span class="string">&#x27;011&#x27;</span>:<span class="string">&#x27;兑&#x27;</span>,<span class="string">&#x27;001&#x27;</span>:<span class="string">&#x27;震&#x27;</span>,<span class="string">&#x27;100&#x27;</span>:<span class="string">&#x27;艮&#x27;</span>&#125;</span><br><span class="line">coin=[]</span><br><span class="line">res=[]</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">7</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;第&#x27;</span>,n,<span class="string">&#x27;次扔硬币&#x27;</span>,sep=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">        coin.append(random.randint(<span class="number">0</span>,<span class="number">1</span>))<span class="comment">#扔三个硬币</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">3</span>):</span><br><span class="line">        <span class="keyword">if</span> coin[t]==<span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;第&#x27;</span>,t+<span class="number">1</span>,<span class="string">&#x27;个硬币为正面&#x27;</span>,sep=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;第&#x27;</span>,t+<span class="number">1</span>,<span class="string">&#x27;个硬币为反面&#x27;</span>,sep=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    zheng=coin.count(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> zheng==<span class="number">0</span>:</span><br><span class="line">        res.append(<span class="number">9</span>)<span class="comment">#9为老阳</span></span><br><span class="line">    <span class="keyword">elif</span> zheng==<span class="number">1</span>:</span><br><span class="line">        res.append(<span class="number">8</span>)<span class="comment">#8为少阴</span></span><br><span class="line">    <span class="keyword">elif</span> zheng==<span class="number">2</span>:</span><br><span class="line">        res.append(<span class="number">7</span>)<span class="comment">#7为少阳</span></span><br><span class="line">    <span class="keyword">elif</span> zheng==<span class="number">3</span>:</span><br><span class="line">        res.append(<span class="number">6</span>)<span class="comment">#6为老阴</span></span><br><span class="line">    coin=[]</span><br><span class="line">transc=[]</span><br><span class="line">trans=[]</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line"><span class="comment">#无变爻的情况</span></span><br><span class="line"><span class="keyword">if</span> res.count(<span class="number">9</span>)+res.count(<span class="number">6</span>)==<span class="number">0</span>:</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">6</span>):</span><br><span class="line">        <span class="keyword">if</span> res[s]==<span class="number">8</span>:<span class="comment">#少阴为阴</span></span><br><span class="line">            trans.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">7</span>:<span class="comment">#少阳为阳</span></span><br><span class="line">            trans.append(<span class="number">1</span>)</span><br><span class="line">    ult=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> trans)</span><br><span class="line">    <span class="built_in">print</span>(iching(ult),<span class="string">&#x27;不变&#x27;</span>,sep=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="comment">#有变爻的情况</span></span><br><span class="line"><span class="keyword">elif</span> res.count(<span class="number">9</span>)+res.count(<span class="number">6</span>)==<span class="number">1</span>:<span class="comment">#仅一个变爻</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">6</span>):</span><br><span class="line">        <span class="keyword">if</span> res[s]==<span class="number">8</span>:<span class="comment">#少阴为阴</span></span><br><span class="line">            trans.append(<span class="number">0</span>)</span><br><span class="line">            transc.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">7</span>:<span class="comment">#少阳为阳</span></span><br><span class="line">            trans.append(<span class="number">1</span>)</span><br><span class="line">            transc.append(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">9</span>:<span class="comment">#老阳阳变阴</span></span><br><span class="line">            transc.append(<span class="number">1</span>)</span><br><span class="line">            trans.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">6</span>:<span class="comment">#老阴阴变阳</span></span><br><span class="line">            transc.append(<span class="number">0</span>)</span><br><span class="line">            trans.append(<span class="number">1</span>)</span><br><span class="line">    ult0=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> transc)<span class="comment">#变爻前</span></span><br><span class="line">    ult=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> trans)<span class="comment">#变爻后</span></span><br><span class="line">    <span class="built_in">print</span>(ult0,ult)</span><br><span class="line">    <span class="built_in">print</span>(iching(ult0),<span class="string">&#x27;之&#x27;</span>,iching(ult),sep=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line"><span class="keyword">elif</span> res.count(<span class="number">9</span>)+res.count(<span class="number">6</span>)&gt;<span class="number">1</span>:<span class="comment">#有多个变爻</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">6</span>):</span><br><span class="line">        <span class="keyword">if</span> res[s]==<span class="number">8</span>:<span class="comment">#少阴为阴</span></span><br><span class="line">            trans.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">7</span>:<span class="comment">#少阳为阳</span></span><br><span class="line">            trans.append(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">9</span>:<span class="comment">#老阳为阳</span></span><br><span class="line">            trans.append(<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">elif</span> res[s]==<span class="number">6</span>:<span class="comment">#老阴为阴</span></span><br><span class="line">            trans.append(<span class="number">0</span>)</span><br><span class="line">    ult=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> trans)</span><br><span class="line">    <span class="built_in">print</span>(ult)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;多个变爻，本卦为&#x27;</span>,iching(ult))</span><br><span class="line"><span class="built_in">input</span>()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>2.简易竹签筮法<br>五十根竹签，除去一根为太极。剩下的四十九根竹签分握于左右手，左手为天右手为地。从右手中抽出一根夹在左手小指中。用右手数左手中的竹签，八根一数，数尽不留，余下的加上左手小指的一根，计数得到下卦：一为乾☰，二为兑☱，三为离☲，四为震☳，五为巽☴，六为坎☵，七为艮☶，八为坤☷。<br>重复以上流程得到上卦。<br>再取四十九根竹签，分握于左右手，从右手取出一根夹于左小指，将左手的签六根一数，数尽不留。余下的加上小指的一根，合计为几时便几爻变。以变爻的爻辞占断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">bagua1=&#123;<span class="string">&#x27;乾&#x27;</span>:<span class="string">&#x27;111&#x27;</span>,<span class="string">&#x27;坤&#x27;</span>:<span class="string">&#x27;000&#x27;</span>,<span class="string">&#x27;坎&#x27;</span>:<span class="string">&#x27;010&#x27;</span>,<span class="string">&#x27;离&#x27;</span>:<span class="string">&#x27;101&#x27;</span>,<span class="string">&#x27;巽&#x27;</span>:<span class="string">&#x27;110&#x27;</span>,<span class="string">&#x27;兑&#x27;</span>:<span class="string">&#x27;011&#x27;</span>,<span class="string">&#x27;震&#x27;</span>:<span class="string">&#x27;001&#x27;</span>,<span class="string">&#x27;艮&#x27;</span>:<span class="string">&#x27;100&#x27;</span>&#125;</span><br><span class="line">bagua2=&#123;<span class="string">&#x27;111&#x27;</span>:<span class="string">&#x27;乾&#x27;</span>,<span class="string">&#x27;000&#x27;</span>:<span class="string">&#x27;坤&#x27;</span>,<span class="string">&#x27;010&#x27;</span>:<span class="string">&#x27;坎&#x27;</span>,<span class="string">&#x27;101&#x27;</span>:<span class="string">&#x27;离&#x27;</span>,<span class="string">&#x27;110&#x27;</span>:<span class="string">&#x27;巽&#x27;</span>,<span class="string">&#x27;011&#x27;</span>:<span class="string">&#x27;兑&#x27;</span>,<span class="string">&#x27;001&#x27;</span>:<span class="string">&#x27;震&#x27;</span>,<span class="string">&#x27;100&#x27;</span>:<span class="string">&#x27;艮&#x27;</span>&#125;</span><br><span class="line">res=[]</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">2</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">3</span>):</span><br><span class="line">        x=random.randint(<span class="number">1</span>,<span class="number">49</span>)<span class="comment">#此为左手所握有的竹签数</span></span><br><span class="line">        y=(x%<span class="number">8</span>)+<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> y==<span class="number">1</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;乾&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">2</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;兑&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">3</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;离&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">4</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;震&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">5</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;巽&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">6</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;坎&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">7</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;艮&#x27;</span>)</span><br><span class="line">        <span class="keyword">elif</span> y==<span class="number">8</span>:</span><br><span class="line">            res.append(<span class="string">&#x27;坤&#x27;</span>)</span><br><span class="line">    <span class="comment">#开始变爻</span></span><br><span class="line">    x=random.randint(<span class="number">1</span>,<span class="number">49</span>)<span class="comment">#此为左手所握有的竹签数</span></span><br><span class="line">    y=(x%<span class="number">6</span>)+<span class="number">1</span></span><br><span class="line">    down=bagua1[res[<span class="number">0</span>]]</span><br><span class="line">    up=bagua1[res[<span class="number">1</span>]]</span><br><span class="line">    down1=down</span><br><span class="line">    up1=up</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">        <span class="keyword">if</span> y==i:</span><br><span class="line">            <span class="comment">#i1=i</span></span><br><span class="line">            <span class="keyword">if</span> down[i-<span class="number">1</span>]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                dl=<span class="built_in">list</span>(down1)<span class="comment">#由于字符串无法直接修改，故先转化为列表，修改后再拼接回字符串</span></span><br><span class="line">                dl[i-<span class="number">1</span>]=<span class="number">0</span><span class="comment">#修改元素</span></span><br><span class="line">                down1=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> dl)<span class="comment">#由于拼接只能用于字符串，故将dl中的整数全转换为字符串后再拼接</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dl=<span class="built_in">list</span>(down1)</span><br><span class="line">                dl[i-<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">                down1=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> dl)</span><br><span class="line">            res[<span class="number">0</span>]=bagua2[down1]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>,<span class="number">7</span>):</span><br><span class="line">        <span class="keyword">if</span> y==i:</span><br><span class="line">            <span class="comment">#i1=i</span></span><br><span class="line">            <span class="keyword">if</span> up[i-<span class="number">4</span>]==<span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                ul=<span class="built_in">list</span>(up1)</span><br><span class="line">                ul[i-<span class="number">4</span>]=<span class="number">0</span></span><br><span class="line">                up1=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> ul)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ul=<span class="built_in">list</span>(up1)</span><br><span class="line">                ul[i-<span class="number">4</span>]=<span class="number">1</span></span><br><span class="line">                up1=<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">str</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> ul)</span><br><span class="line">            res[<span class="number">1</span>]=bagua2[up1]</span><br><span class="line">    <span class="built_in">print</span>(iching(up+down),<span class="string">&#x27;之&#x27;</span>,iching(up1+down1),sep=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    res=[]</span><br><span class="line"><span class="built_in">input</span>()</span><br></pre></td></tr></table></figure><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        无名小卒
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://test.iqimi.top/2022/09/09/python实现简单的卜筮方法/" title="python实现简单的卜筮方法">https://test.iqimi.top/2022/09/09/python实现简单的卜筮方法/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2022/09/14/%E7%AE%80%E5%8D%95%E7%9A%84%E4%B8%8D%E7%AD%89%E5%BC%8F%E6%8E%A8%E5%AF%BC/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E5%AD%A6/">
+                    数学
+                </a>
+            </div>
+            <h5>
+                <a href="/2022/09/14/%E7%AE%80%E5%8D%95%E7%9A%84%E4%B8%8D%E7%AD%89%E5%BC%8F%E6%8E%A8%E5%AF%BC/" class="trm-anima-link">
+                    简单的不等式推导
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/09/14</li>
+                <li>23:06</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+    
+
+    <div class="trm-card trm-scroll-animation comment-container" data-scroll data-scroll-offset="50">
+    <div id="tcomment"></div>
+</div>
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+    
+        <div class="trm-footer-item">
+            <a href="https://icp.gov.moe/?keyword=20221428" target="_blank">萌ICP备20221428号</a>
+        </div>
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/03/2022 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+
+            
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.7/dist/twikoo.all.min.js" data-swup-reload-script data-reset="true"></script>
+
+            <script data-swup-reload-script>
+                twikoo.init({
+                    ...{"enable":true,"envId":"https://mytwikoo-delta.vercel.app/"},
+                    el:'#tcomment'
+                }).then(function () {
+                    let container = document.querySelector('body>.tk-admin-container')
+                    if(container) container.remove()
+                    document.body.append(document.querySelector('.tk-admin-container'))
+                });;
+            </script>
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>

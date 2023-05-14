@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="基本的三元组数据结构：matrix.h如下。 1234567891011#pragma once&#x2F;&#x2F;防止多次引用&#x2F;&#x2F;每一个三元组的内容typedef struct &amp;#123;	int i, j;	int val;&amp;#125;tri;&#x2F;&#x2F;用于表示整个矩阵的三元组typedef struct &amp;#123;	tri val[20];	int n, m, num;&amp;#125;tsmat;  在此之中包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三元组矩阵的运算">
+<meta property="og:url" content="https://test.iqimi.top/2022/12/02/%E4%B8%89%E5%85%83%E7%BB%84%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%90%E7%AE%97/index.html">
+<meta property="og:site_name" content="无名小传">
+<meta property="og:description" content="基本的三元组数据结构：matrix.h如下。 1234567891011#pragma once&#x2F;&#x2F;防止多次引用&#x2F;&#x2F;每一个三元组的内容typedef struct &amp;#123;	int i, j;	int val;&amp;#125;tri;&#x2F;&#x2F;用于表示整个矩阵的三元组typedef struct &amp;#123;	tri val[20];	int n, m, num;&amp;#125;tsmat;  在此之中包含">
+<meta property="og:locale">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="article:published_time" content="2022-12-02T05:10:00.000Z">
+<meta property="article:modified_time" content="2023-01-21T12:52:32.820Z">
+<meta property="article:author" content="无名小卒">
+<meta property="article:tag" content="作业，c++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://test.iqimi.top/img/404.jpg">
+
+
+<title >三元组矩阵的运算</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"test.iqimi.top","author":"无名小卒","root":"/","typed_text":null,"theme_version":"2.0.9","theme":{"switch":true,"default":"style-dark"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://cdn.jsdelivr.net/npm/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-01-21 20:52:32"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            无名<span>小传</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            三元组矩阵的运算
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2022
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        无名小卒
+    </h5>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
+            <i class="iconfont fab fa-github"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                不知何处
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                City:
+            </div>
+            <div class="trm-label trm-label-light">
+                徐扬之地
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                ？
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:qimi285714@outlook.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#基本的三元组数据结构："  data-scroll-to="#基本的三元组数据结构："><span class="toc-number">1.</span> <span class="toc-text">基本的三元组数据结构：</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#输入-x2F-输出函数："  data-scroll-to="#输入-x2F-输出函数："><span class="toc-number">2.</span> <span class="toc-text">输入&#x2F;输出函数：</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#运算实现函数"  data-scroll-to="#运算实现函数"><span class="toc-number">3.</span> <span class="toc-text">运算实现函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#加法逻辑："  data-scroll-to="#加法逻辑："><span class="toc-number">3.1.</span> <span class="toc-text">加法逻辑：</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#乘法逻辑："  data-scroll-to="#乘法逻辑："><span class="toc-number">3.2.</span> <span class="toc-text">乘法逻辑：</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#主函数："  data-scroll-to="#主函数："><span class="toc-number">4.</span> <span class="toc-text">主函数：</span></a></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            12/02
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            13:10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            无名小卒
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h2 id="基本的三元组数据结构："><a href="#基本的三元组数据结构：" class="headerlink" title="基本的三元组数据结构："></a>基本的三元组数据结构：</h2><p><code>matrix.h</code>如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once<span class="comment">//防止多次引用</span></span></span><br><span class="line"><span class="comment">//每一个三元组的内容</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">	<span class="type">int</span> i, j;</span><br><span class="line">	<span class="type">int</span> val;</span><br><span class="line">&#125;tri;</span><br><span class="line"><span class="comment">//用于表示整个矩阵的三元组</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">	tri val[<span class="number">20</span>];</span><br><span class="line">	<span class="type">int</span> n, m, num;</span><br><span class="line">&#125;tsmat;</span><br></pre></td></tr></table></figure>
+
+<p>在此之中包含了两个结构体。第一个<code>tri</code>为三元组结构，以<code>[i,j,val]</code>形式存储一个三元组。而第二个<code>tsmat</code>即为<code>tri</code>的集合，最大二十个。</p>
+<h2 id="输入-x2F-输出函数："><a href="#输入-x2F-输出函数：" class="headerlink" title="输入&#x2F;输出函数："></a>输入&#x2F;输出函数：</h2><p><code>io.h</code>如下。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;matrix.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//输入函数</span></span><br><span class="line"><span class="function">tsmat *<span class="title">input_mat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">int</span> m, n;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;请输入矩阵的行数&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cin &gt;&gt; m;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;请输入矩阵的列数&quot;</span> &lt;&lt; endl;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	tsmat* matrix=<span class="keyword">new</span> tsmat;</span><br><span class="line">	matrix-&gt;m = m;</span><br><span class="line">	matrix-&gt;n = n;</span><br><span class="line">	matrix-&gt;num = <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> no = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; matrix-&gt;m; i++) &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;请输入第&quot;</span> &lt;&lt; i+<span class="number">1</span> &lt;&lt; <span class="string">&quot;列内容&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; matrix-&gt;n; j++) &#123;</span><br><span class="line">			<span class="type">int</span> in;</span><br><span class="line">			cin &gt;&gt; in;</span><br><span class="line">			<span class="keyword">if</span> (in) &#123;</span><br><span class="line">				matrix-&gt;val[no].i = i;</span><br><span class="line">				matrix-&gt;val[no].j = j;</span><br><span class="line">				matrix-&gt;val[no].val = in;</span><br><span class="line">				matrix-&gt;num++;</span><br><span class="line">				no++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> matrix;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">output_mat</span><span class="params">(tsmat *t)</span> </span>&#123;</span><br><span class="line">	vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">mat</span>(t-&gt;m,<span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(t-&gt;n));</span><br><span class="line">	<span class="comment">//先初始化一个vector容器，再用三元组中的值替换其中的对应值</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; t-&gt;m; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; t-&gt;n; j++) &#123;</span><br><span class="line">			mat[i][j]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt; t-&gt;num; n++) &#123;</span><br><span class="line">		mat[t-&gt;val[n].i][t-&gt;val[n].j] = t-&gt;val[n].val;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; t-&gt;m; p++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> q = <span class="number">0</span>; q &lt; t-&gt;n; q++) &#123;</span><br><span class="line">			cout &lt;&lt; mat[p][q];</span><br><span class="line">			<span class="keyword">if</span> (q == t-&gt;n - <span class="number">1</span>) &#123; cout &lt;&lt; endl; &#125;</span><br><span class="line">			<span class="keyword">else</span> &#123; cout &lt;&lt; <span class="string">&quot; &quot;</span>; &#125;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过将三元组逐个填入vector空位的方式输出。</p>
+<h2 id="运算实现函数"><a href="#运算实现函数" class="headerlink" title="运算实现函数"></a>运算实现函数</h2><p><code>func.h</code>如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;matrix.h&quot;</span></span></span><br><span class="line"><span class="comment">//输出至t3</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="keyword">inline</span> <span class="title">append</span><span class="params">(tsmat* ti, tsmat* to, <span class="type">int</span>&amp; n, <span class="type">int</span>&amp; c)</span> </span>&#123;</span><br><span class="line">	to-&gt;val[n].i = ti-&gt;val[c].i;</span><br><span class="line">	to-&gt;val[n].j = ti-&gt;val[c].j;</span><br><span class="line">	to-&gt;val[n].val = ti-&gt;val[c].val;</span><br><span class="line">	n++;</span><br><span class="line">	c++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="keyword">inline</span> <span class="title">appendminus</span><span class="params">(tsmat* ti, tsmat* to, <span class="type">int</span>&amp; n, <span class="type">int</span>&amp; c)</span> </span>&#123;</span><br><span class="line">	to-&gt;val[n].i = ti-&gt;val[c].i;</span><br><span class="line">	to-&gt;val[n].j = ti-&gt;val[c].j;</span><br><span class="line">	to-&gt;val[n].val = -ti-&gt;val[c].val;</span><br><span class="line">	n++;</span><br><span class="line">	c++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//矩阵的转置</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">trans</span><span class="params">(tsmat* t)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;你输入的矩阵为&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t);</span><br><span class="line">	<span class="type">int</span> swap;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> n = <span class="number">0</span>; n &lt; t-&gt;num; n++) &#123;</span><br><span class="line">		swap = t-&gt;val[n].i;</span><br><span class="line">		t-&gt;val[n].i = t-&gt;val[n].j;</span><br><span class="line">		t-&gt;val[n].j = swap;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;转置后的矩阵为&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//矩阵相加</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">matadd</span><span class="params">(tsmat* t1, tsmat* t2)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;你执行的操作为&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t1);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;加上&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t2);</span><br><span class="line">	tsmat* t3 = <span class="keyword">new</span> tsmat;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>, n = <span class="number">0</span>;</span><br><span class="line">	<span class="type">bool</span> flag=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span>(t1-&gt;m==t2-&gt;m&amp;&amp;t1-&gt;n==t2-&gt;n)&#123;</span><br><span class="line">		<span class="keyword">while</span> (flag) &#123;</span><br><span class="line">			<span class="comment">//一方输出完后直接输出另一方全部数值</span></span><br><span class="line">			<span class="keyword">if</span> (a &gt; t1-&gt;num) &#123;</span><br><span class="line">				<span class="keyword">while</span> (b &lt;= t2-&gt;num) &#123;</span><br><span class="line">					<span class="built_in">append</span>(t2, t3, n, b);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (b &gt; t2-&gt;num) &#123;</span><br><span class="line">				<span class="keyword">while</span> (a &lt;= t1-&gt;num) &#123;</span><br><span class="line">					<span class="built_in">append</span>(t1, t2, n, a);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//首先比较行号，行号不等输出较小者</span></span><br><span class="line">				<span class="keyword">if</span> (t1-&gt;val[a].i &lt; t2-&gt;val[b].i) &#123;</span><br><span class="line">					<span class="built_in">append</span>(t1, t3, n, a);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].i &gt; t2-&gt;val[b].i) &#123;</span><br><span class="line">					<span class="built_in">append</span>(t2, t3, n, b);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].i == t2-&gt;val[b].i) &#123;</span><br><span class="line">					<span class="comment">//行号相等比较列号，列号不等输出较小者</span></span><br><span class="line">					<span class="keyword">if</span> (t1-&gt;val[a].j &lt; t2-&gt;val[b].j) &#123;</span><br><span class="line">						<span class="built_in">append</span>(t1, t3, n, a);</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].j &gt; t2-&gt;val[b].j) &#123;</span><br><span class="line">						<span class="built_in">append</span>(t2, t3, n, b);</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="comment">//两者都相等输出和</span></span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].j == t2-&gt;val[b].j) &#123;</span><br><span class="line">						t3-&gt;val[n].i = t1-&gt;val[a].i;</span><br><span class="line">						t3-&gt;val[n].j = t1-&gt;val[a].j;</span><br><span class="line">						t3-&gt;val[n].val = t1-&gt;val[a].val + t2-&gt;val[b].val;</span><br><span class="line">						a++;</span><br><span class="line">						b++;</span><br><span class="line">						n++;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		t3-&gt;m = t1-&gt;m; t3-&gt;n = t1-&gt;n; t3-&gt;num = n<span class="number">-1</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;相加得到的矩阵为&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">output_mat</span>(t3);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;这两个矩阵不能相加&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//矩阵相减</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">matminus</span><span class="params">(tsmat*t1,tsmat*t2)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;你执行的操作为&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t1);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;减去&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t2);</span><br><span class="line">	tsmat* t3 = <span class="keyword">new</span> tsmat;</span><br><span class="line">	<span class="type">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>, n = <span class="number">0</span>;</span><br><span class="line">	<span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">if</span> (t1-&gt;m == t2-&gt;m &amp;&amp; t1-&gt;n == t2-&gt;n) &#123;</span><br><span class="line">		<span class="keyword">while</span> (flag) &#123;</span><br><span class="line">			<span class="comment">//一方输出完后直接输出另一方全部数值</span></span><br><span class="line">			<span class="keyword">if</span> (a &gt; t1-&gt;num) &#123;</span><br><span class="line">				<span class="keyword">while</span> (b &lt;= t2-&gt;num) &#123;</span><br><span class="line">					<span class="built_in">append</span>(t2, t3, n, b);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (b &gt; t2-&gt;num) &#123;</span><br><span class="line">				<span class="keyword">while</span> (a &lt;= t1-&gt;num) &#123;</span><br><span class="line">					<span class="built_in">appendminus</span>(t1, t2, n, a);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="comment">//首先比较行号，行号不等输出较小者</span></span><br><span class="line">				<span class="keyword">if</span> (t1-&gt;val[a].i &lt; t2-&gt;val[b].i) &#123;</span><br><span class="line">					<span class="built_in">append</span>(t1, t3, n, a);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].i &gt; t2-&gt;val[b].i) &#123;</span><br><span class="line">					<span class="built_in">appendminus</span>(t2, t3, n, b);</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].i == t2-&gt;val[b].i) &#123;</span><br><span class="line">					<span class="comment">//行号相等比较列号，列号不等输出较小者</span></span><br><span class="line">					<span class="keyword">if</span> (t1-&gt;val[a].j &lt; t2-&gt;val[b].j) &#123;</span><br><span class="line">						<span class="built_in">append</span>(t1, t3, n, a);</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].j &gt; t2-&gt;val[b].j) &#123;</span><br><span class="line">						<span class="built_in">appendminus</span>(t2, t3, n, b);</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="comment">//两者都相等输出差</span></span><br><span class="line">					<span class="keyword">else</span> <span class="keyword">if</span> (t1-&gt;val[a].j == t2-&gt;val[b].j) &#123;</span><br><span class="line">						t3-&gt;val[n].i = t1-&gt;val[a].i;</span><br><span class="line">						t3-&gt;val[n].j = t1-&gt;val[a].j;</span><br><span class="line">						t3-&gt;val[n].val = t1-&gt;val[a].val - t2-&gt;val[b].val;</span><br><span class="line">						a++;</span><br><span class="line">						b++;</span><br><span class="line">						n++;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		t3-&gt;m = t1-&gt;m; t3-&gt;n = t1-&gt;n; t3-&gt;num = n - <span class="number">1</span>;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;相减得到的矩阵为&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">output_mat</span>(t3);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;这两个矩阵不能相减&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//矩阵相乘</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">matmult</span><span class="params">(tsmat* t1, tsmat* t2)</span> </span>&#123;</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;你执行的操作为&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t1);</span><br><span class="line">	cout &lt;&lt; <span class="string">&quot;乘上&quot;</span> &lt;&lt; endl;</span><br><span class="line">	<span class="built_in">output_mat</span>(t2);</span><br><span class="line">	tsmat *t3 = <span class="keyword">new</span> tsmat;</span><br><span class="line">	t3-&gt;num = <span class="number">0</span>;</span><br><span class="line">	<span class="type">bool</span> b = <span class="literal">true</span>;</span><br><span class="line">	<span class="comment">//前者行数等于后者列数才能相乘</span></span><br><span class="line">	<span class="keyword">if</span> (t1-&gt;m == t2-&gt;n) &#123;</span><br><span class="line">		<span class="comment">//遍历t1序号</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> p = <span class="number">0</span>; p &lt; t1-&gt;num; p++) &#123;</span><br><span class="line">			<span class="comment">//遍历t2，查找是否有行号与t1现三元组列号相等的三元组</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="type">int</span> q = <span class="number">0</span>; q &lt; t2-&gt;num; q++) &#123;</span><br><span class="line">				<span class="keyword">if</span> (t1-&gt;val[p].j == t2-&gt;val[q].i) &#123;</span><br><span class="line">					<span class="comment">//若t3中存在行列都相等的三元组，将原值与得到的值相加</span></span><br><span class="line">					<span class="keyword">for</span> (<span class="type">int</span> s = <span class="number">0</span>; s &lt; t3-&gt;num+<span class="number">1</span>; s++) &#123;</span><br><span class="line">						<span class="keyword">if</span> (t3-&gt;val[s].i == t1-&gt;val[p].i &amp;&amp; t3-&gt;val[s].j == t2-&gt;val[q].j) &#123;</span><br><span class="line">							b = <span class="literal">false</span>;</span><br><span class="line">							t3-&gt;val[s].val += t1-&gt;val[p].val * t2-&gt;val[q].val;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">						<span class="comment">//没有则添入此值</span></span><br><span class="line">					<span class="keyword">if</span>(b) &#123;</span><br><span class="line">						t3-&gt;val[t3-&gt;num].i = t1-&gt;val[p].i;</span><br><span class="line">						t3-&gt;val[t3-&gt;num].j = t2-&gt;val[q].j;</span><br><span class="line">						t3-&gt;val[t3-&gt;num].val = t1-&gt;val[p].val * t2-&gt;val[q].val;</span><br><span class="line">						t3-&gt;num++;</span><br><span class="line">					&#125;</span><br><span class="line">					b = <span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		t3-&gt;m = t1-&gt;m;</span><br><span class="line">		t3-&gt;n = t2-&gt;n;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;结果为&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="built_in">output_mat</span>(t3);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;这两个矩阵不能相乘&quot;</span> &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="加法逻辑："><a href="#加法逻辑：" class="headerlink" title="加法逻辑："></a>加法逻辑：</h3><p><img src="/2022/12/02/%E4%B8%89%E5%85%83%E7%BB%84%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%90%E7%AE%97/%E5%8A%A0%E6%B3%95.png" alt="加法" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h3 id="乘法逻辑："><a href="#乘法逻辑：" class="headerlink" title="乘法逻辑："></a>乘法逻辑：</h3><p><img src="/2022/12/02/%E4%B8%89%E5%85%83%E7%BB%84%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%90%E7%AE%97/%E4%B9%98%E6%B3%95.jpg" alt="乘法" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<h2 id="主函数："><a href="#主函数：" class="headerlink" title="主函数："></a>主函数：</h2><p><code>main.cpp</code>如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;io.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;func.h&quot;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">while</span> (flag) &#123;</span><br><span class="line">		cout &lt;&lt; <span class="string">&quot;请输入你需要做的操作的编号&quot;</span> &lt;&lt; endl;</span><br><span class="line">		cout &lt;&lt; <span class="number">1</span> &lt;&lt; <span class="string">&quot;. 矩阵的转置&quot;</span> &lt;&lt; endl</span><br><span class="line">			&lt;&lt; <span class="number">2</span> &lt;&lt; <span class="string">&quot;. 求矩阵的和&quot;</span> &lt;&lt; endl</span><br><span class="line">			&lt;&lt; <span class="number">3</span> &lt;&lt; <span class="string">&quot;. 求矩阵的差&quot;</span> &lt;&lt; endl</span><br><span class="line">			&lt;&lt; <span class="number">4</span> &lt;&lt; <span class="string">&quot;. 求矩阵的积&quot;</span> &lt;&lt; endl</span><br><span class="line">			&lt;&lt; <span class="number">0</span> &lt;&lt; <span class="string">&quot;. 退出&quot;</span> &lt;&lt; endl;</span><br><span class="line">		<span class="type">int</span> ch;</span><br><span class="line">		cin &gt;&gt; ch;</span><br><span class="line">		<span class="keyword">switch</span> (ch) &#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">1</span>: &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;准备进行矩阵的转置，请输入要转置的矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			<span class="built_in">trans</span>(<span class="built_in">input_mat</span>());</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">2</span>:&#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;准备求矩阵的和，请输入第一个矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			tsmat* t1 = <span class="built_in">input_mat</span>();</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;请输入第二个矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			tsmat* t2 = <span class="built_in">input_mat</span>();</span><br><span class="line">			<span class="built_in">matadd</span>(t1, t2);</span><br><span class="line">			<span class="built_in">delete</span>(t1); <span class="built_in">delete</span>(t2);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">3</span>: &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;准备求矩阵的差，请输入被减矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			tsmat* t1 = <span class="built_in">input_mat</span>();</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;请输入减去的矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			tsmat* t2 = <span class="built_in">input_mat</span>();</span><br><span class="line">			<span class="built_in">matminus</span>(t1, t2);</span><br><span class="line">			<span class="built_in">delete</span>(t1); <span class="built_in">delete</span>(t2);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">4</span>: &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;准备求矩阵的积，请输入前矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			tsmat* t1 = <span class="built_in">input_mat</span>();</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;请输入后矩阵&quot;</span> &lt;&lt; endl;</span><br><span class="line">			tsmat* t2 = <span class="built_in">input_mat</span>();</span><br><span class="line">			<span class="built_in">matmult</span>(t1, t2);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">case</span> <span class="number">0</span>: &#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">default</span>: &#123;</span><br><span class="line">			cout &lt;&lt; <span class="string">&quot;请输入正确的编号&quot;</span> &lt;&lt; endl;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>以上。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        无名小卒
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://test.iqimi.top/2022/12/02/三元组矩阵的运算/" title="三元组矩阵的运算">https://test.iqimi.top/2022/12/02/三元组矩阵的运算/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2023/01/04/%E6%9D%A8%E6%9F%B3%E9%A3%8E/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%9E%B6%E7%A9%BA/">
+                    架空
+                </a>
+            </div>
+            <h5>
+                <a href="/2023/01/04/%E6%9D%A8%E6%9F%B3%E9%A3%8E/" class="trm-anima-link">
+                    【自设架空】同潮会：杨柳风
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/01/04</li>
+                <li>20:40</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/2022/11/08/%E9%AB%98%E6%95%B0%E4%BD%9C%E4%B8%9A%E4%B8%80/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E5%AD%A6/">
+                    数学
+                </a>
+            </div>
+            <h5>
+                <a href="/2022/11/08/%E9%AB%98%E6%95%B0%E4%BD%9C%E4%B8%9A%E4%B8%80/" class="trm-anima-link">
+                    高数作业一
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>22/11/08</li>
+                <li>15:10</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+    <div class="trm-card trm-scroll-animation comment-container" data-scroll data-scroll-offset="50">
+    <div id="tcomment"></div>
+</div>
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v6.3.0
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+    
+        <div class="trm-footer-item">
+            <a href="https://icp.gov.moe/?keyword=20221428" target="_blank">萌ICP备20221428号</a>
+        </div>
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/03/2022 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+
+            
+<script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.7/dist/twikoo.all.min.js" data-swup-reload-script data-reset="true"></script>
+
+            <script data-swup-reload-script>
+                twikoo.init({
+                    ...{"enable":true,"envId":"https://mytwikoo-delta.vercel.app/"},
+                    el:'#tcomment'
+                }).then(function () {
+                    let container = document.querySelector('body>.tk-admin-container')
+                    if(container) container.remove()
+                    document.body.append(document.querySelector('.tk-admin-container'))
+                });;
+            </script>
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>
