@@ -13,8 +13,8 @@ https://test.iqimi.top/about/index.html
 https://test.iqimi.top/links/index.html
 https://test.iqimi.top/comment/index.html
 https://test.iqimi.top/
-https://test.iqimi.top/tags/python/
 https://test.iqimi.top/tags/c/
+https://test.iqimi.top/tags/python/
 https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A%EF%BC%8Cc/
 https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/
 https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A/
