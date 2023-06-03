@@ -2,6 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://test.iqimi.top/2022/12/04/%E5%89%8D%E4%B8%80/</loc>
+    
+    <lastmod>2023-06-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://test.iqimi.top/2022/03/05/%E6%A1%83%E8%8A%B1%E6%BA%90%E8%A7%A3/</loc>
+    
+    <lastmod>2023-06-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://test.iqimi.top/2022/01/14/%E7%94%B2%E5%8D%88%E6%95%91%E5%85%B8/</loc>
+    
+    <lastmod>2023-06-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://test.iqimi.top/2023/01/04/%E6%9D%A8%E6%9F%B3%E9%A3%8E/</loc>
     
     <lastmod>2023-06-03</lastmod>
@@ -137,6 +164,13 @@
 
   
   <url>
+    <loc>https://test.iqimi.top/tags/c/</loc>
+    <lastmod>2023-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://test.iqimi.top/tags/python/</loc>
     <lastmod>2023-06-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -151,14 +185,14 @@
   </url>
   
   <url>
-    <loc>https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/</loc>
+    <loc>https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2023-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://test.iqimi.top/tags/c/</loc>
+    <loc>https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/</loc>
     <lastmod>2023-06-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
