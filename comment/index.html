@@ -287,15 +287,6 @@
 <!-- card header end -->
         <!-- sidebar social -->
 
-<div class="trm-divider trm-mb-40 trm-mt-40"></div>
-<div class="trm-social">
-    
-        <a href="https://github.com" title="Github" rel="nofollow" target="_blank">
-            <i class="iconfont fab fa-github"></i>
-        </a>
-    
-</div>
-
 <!-- sidebar social end -->
         <!-- info -->
 <div class="trm-divider trm-mb-40 trm-mt-40"></div>
@@ -353,10 +344,6 @@
                     <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
 
                     <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
-
-    <div class="trm-card trm-scroll-animation comment-container" data-scroll data-scroll-offset="50">
-    <div id="tcomment"></div>
-</div>
 
 
                     <div class="trm-divider footer-divider"></div>
@@ -420,6 +407,10 @@
             <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
     
     
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
     <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
         <i class="iconfont fas fa-arrow-up"></i>
     </div>
@@ -459,22 +450,6 @@
     <!-- 评论插件 -->
     
         
-
-        
-
-            
-<script src="https://unpkg.com/twikoo@1.6.7/dist/twikoo.all.min.js" data-swup-reload-script data-reset="true"></script>
-
-            <script data-swup-reload-script>
-                twikoo.init({
-                    ...{"enable":true,"envId":"https://mytwikoo-delta.vercel.app/"},
-                    el:'#tcomment'
-                }).then(function () {
-                    let container = document.querySelector('body>.tk-admin-container')
-                    if(container) container.remove()
-                    document.body.append(document.querySelector('.tk-admin-container'))
-                });;
-            </script>
 
         
     
