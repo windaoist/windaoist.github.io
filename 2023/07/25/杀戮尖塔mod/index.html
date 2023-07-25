@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="杀戮尖塔mod开发的二三事注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（ 文中提到的人物mod还没有做完，暂缓更新。 开发过程准备本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。 由于没有任何相关的项目实践基础，我只能去参考一些相关的教程来了解如何开发。下面是我参考过的教程链接（中文）： 杀戮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="杀戮尖塔mod开发的二三事">
+<meta property="og:url" content="https://test.iqimi.top/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/index.html">
+<meta property="og:site_name" content="无名小传">
+<meta property="og:description" content="杀戮尖塔mod开发的二三事注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（ 文中提到的人物mod还没有做完，暂缓更新。 开发过程准备本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。 由于没有任何相关的项目实践基础，我只能去参考一些相关的教程来了解如何开发。下面是我参考过的教程链接（中文）： 杀戮">
+<meta property="og:locale">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="article:published_time" content="2023-07-25T04:10:00.000Z">
+<meta property="article:modified_time" content="2023-07-25T04:30:10.329Z">
+<meta property="article:author" content="无名小卒">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://test.iqimi.top/img/404.jpg">
+
+
+<title >杀戮尖塔mod开发的二三事</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"test.iqimi.top","author":"无名小卒","root":"/","typed_text":null,"theme_version":"2.0.9","theme":{"switch":true,"default":"style-dark"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-07-25 12:30:10"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.0.0-rc1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            无名<span>小传</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            杀戮尖塔mod开发的二三事
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        无名小卒
+    </h5>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                不知何处
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                City:
+            </div>
+            <div class="trm-label trm-label-light">
+                徐扬之地
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                ？
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:qimi285714@outlook.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#杀戮尖塔mod开发的二三事"  data-scroll-to="#杀戮尖塔mod开发的二三事"><span class="toc-number">1.</span> <span class="toc-text">杀戮尖塔mod开发的二三事</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#开发过程"  data-scroll-to="#开发过程"><span class="toc-number">1.1.</span> <span class="toc-text">开发过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#准备"  data-scroll-to="#准备"><span class="toc-number">1.1.1.</span> <span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#构建框架"  data-scroll-to="#构建框架"><span class="toc-number">1.1.2.</span> <span class="toc-text">构建框架</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#实际上手"  data-scroll-to="#实际上手"><span class="toc-number">1.1.3.</span> <span class="toc-text">实际上手</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#其他感想"  data-scroll-to="#其他感想"><span class="toc-number">1.2.</span> <span class="toc-text">其他感想</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            07/25
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            12:10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            无名小卒
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="杀戮尖塔mod开发的二三事"><a href="#杀戮尖塔mod开发的二三事" class="headerlink" title="杀戮尖塔mod开发的二三事"></a>杀戮尖塔mod开发的二三事</h1><p>注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（</p>
+<p>文中提到的人物mod还没有做完，暂缓更新。</p>
+<h2 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。</p>
+<p>由于没有任何相关的项目实践基础，我只能去参考一些相关的教程来了解如何开发。下面是我参考过的教程链接（中文）：</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1415708635800080384">杀戮尖塔MOD制作 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/REMEeasy/SlayTheSpireModTutorials/tree/master/Tutorials">REME大佬主编的mod制作教程</a></p>
+<p>以及官方文档（生肉）：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/daviscook477/BaseMod">Github-Basemod</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/kiooeht/StSLib">Github-StSLib</a></p>
+<p>本人在开发过程中遇到的许多技术难题都是靠着这几份教程解决的。</p>
+<p>除了这些文档与教程之外，我也大量参考了其他mod作品，由于java的开源本质，这些mod文件可以被很轻易地反编译。这些mod包括替罪羔羊mod、AKD遗物mod、蔡徐坤mod等等。在此向这些文档、教程以及mod作者致以谢意。</p>
+<h3 id="构建框架"><a href="#构建框架" class="headerlink" title="构建框架"></a>构建框架</h3><p>在翻了一点资料后，我发现这款游戏是用基于Java编写的开源框架libGDX开发的。然后又查了一下，发现这框架可不得了，因为我在这个框架开发的游戏之中又见到了一些其他熟悉的身影：</p>
+<ol>
+<li>mindustry（像素工厂）</li>
+</ol>
+<p><img src="/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/mindustry.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>一款游戏性极强的RTS塔防游戏，整体玩法上类似异星工厂，开源免费</p>
+<ol start="2">
+<li>unciv（像素版文明5）</li>
+</ol>
+<p><img src="/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/unciv.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>手机上能玩的仿文明类游戏中最好的一款，轻量流畅，开源免费，还支持联机</p>
+<ol start="3">
+<li>infinitode 2（无尽塔防2）</li>
+</ol>
+<p><img src="/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/infi.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>继塔防游戏三幻神（王国保卫战，植物大战僵尸，气球塔防）之后又一款优秀的塔防游戏，机制上比较纯粹，少数的雷点包括资源太肝（不过反正是单机，简单地修改一下掉落率就行）和制作者亲乌没办法的事），其他都很不错，而且免费游戏要啥自行车啊（</p>
+<ol start="4">
+<li>shattered pixel dungeon（破碎像素地牢）</li>
+</ol>
+<p><img src="/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/spd.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>这位更是重量级，极其经典的传统式rogue-like游戏像素地牢最成功的改版，也是开源免费</p>
+<p>这就是开源框架吗，开源社区的威力可见一斑。而杀戮尖塔虽然不是免费游戏，但开源（代码可以随便反编译），而且作为界内公认的最佳rogue-like卡牌游戏，它也没有辜负这个框架的威名（笑）</p>
+<p><img src="/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/sts.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>官网也把杀戮尖塔放在了第一个。</p>
+<h3 id="实际上手"><a href="#实际上手" class="headerlink" title="实际上手"></a>实际上手</h3><p>接下来就要看看这游戏mod的基本结构了。在折腾了好一段时间后，我也弄清楚了这一点。</p>
+<p>这游戏mod的基本组成结构只有两个：</p>
+<ul>
+<li>内容类，内部包含自己定义的增添内容，包括卡牌、遗物、事件、能力等；</li>
+<li>注册类，将已经定义的内容在basemod中注册，以让MTS（ModTheSpire，mod启动器）在给游戏打包时将增添的内容打包进去。</li>
+</ul>
+<h4 id="注册类"><a href="#注册类" class="headerlink" title="注册类"></a>注册类</h4><p>先说注册类。在MTS打包游戏时，它首先会检测包含注解<code>@SpireInitializer</code>的类，将这些类中的<code>Subscriber</code>相关内容打包进游戏文件。这个动作是由接口——回调函数实现的。</p>
+<p>虽然每一个类都可以加上这个注解，但出于代码管理与游戏性能考虑，一般把大宗的注册任务集中放在一个类中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpireInitializer</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">xxxMod</span></span><br><span class="line">        <span class="keyword">implements</span> <span class="title class_">EditCardsSubscriber</span>, EditCharactersSubscriber, EditStringsSubscriber, EditRelicsSubscriber,</span><br><span class="line">        EditKeywordsSubscriber &#123;</span><br><span class="line">        ……</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个注册类实现了<code>EditCardsSubscriber</code>、<code>EditCharactersSubscriber</code>等接口，而这些接口是另一个接口<code>ISubscriber</code>的子接口。这些接口的定义中只有一个对应的回调函数（如<code>EditCardsSubscriber</code>接口包含<code>receiveEditCards()</code>等），而这些函数在这里被实现后便会被MTS在初始化过程中被调用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//主注册类的构造函数</span></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">xxxMod</span><span class="params">()</span> &#123;</span><br><span class="line">        BaseMod.subscribe((ISubscriber) <span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>具体来讲，<code>receiveEditCards()</code>里需要这样实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receiveEditCards</span><span class="params">()</span> &#123;</span><br><span class="line">    BaseMod.addCard((AbstractCard) <span class="keyword">new</span> <span class="title class_">Example_Card</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样便可以在游戏中添加<code>Example_Card()</code>类对应的卡牌。</p>
+<p>而这样添加的本质，是basemod把这些卡加进了一个数组之中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//摘自BaseMod.class</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">addCard</span><span class="params">(AbstractCard card)</span> &#123;</span><br><span class="line">      <span class="keyword">switch</span> (<span class="number">1.</span>$SwitchMap$com$megacrit$cardcrawl$cards$AbstractCard$CardColor[card.color.ordinal()]) &#123;</span><br><span class="line">         <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            redToAdd.add(card);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            greenToAdd.add(card);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">            blueToAdd.add(card);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            purpleToAdd.add(card);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">            colorlessToAdd.add(card);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">            curseToAdd.add(card);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">default</span>:</span><br><span class="line">            customToAdd.add(card);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>至于这里的数组具体是怎么被读取并加入游戏中的，这里就不过多追究了。</p>
+<p>除了卡牌，其他的内容也是以类似的形式加进去的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加遗物</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receiveEditRelics</span><span class="params">()</span> &#123;</span><br><span class="line">        BaseMod.addRelicToCustomPool((AbstractRelic) <span class="keyword">new</span> <span class="title class_">CustomRelic</span>(), COLOR_OF_YOUR_CHARACTER);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//添加本地化文本</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">receiveEditStrings</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">cardStrings</span> <span class="operator">=</span> Gdx.files.internal(<span class="string">&quot;path/to/your/localization/json&quot;</span>).readString(String.valueOf(StandardCharsets.UTF_8));</span><br><span class="line">        BaseMod.loadCustomStrings(CardStrings.class, cardStrings);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上便是注册类的大致内容。</p>
+<h4 id="内容类"><a href="#内容类" class="headerlink" title="内容类"></a>内容类</h4><p>尖塔mod可加入的东西的种类非常之多，包括但不限于人物、卡牌、遗物、关键词、事件、动作、能力等等。接下来便会大致讲讲这些东西都是怎么实现的。</p>
+<p>注意，在mod制作过程中应继承已由basemod封装的<code>Customxxx</code>父类而非原版的<code>Abstractxxx</code>父类。</p>
+<h5 id="人物"><a href="#人物" class="headerlink" title="人物"></a>人物</h5><p>人物类是抽象类<code>AbstractPlayer</code>的子类。它包括的抽象方法包括但不限于指定初始卡组、指定初始遗物、指定对应颜色（尖塔里的卡牌种类是按颜色区分的）、指定选人界面素材、指定心脏对话、指定吸血鬼对话性别等等。人物类的构建比较繁杂与单一，这里就不细说了。</p>
+<h5 id="卡牌"><a href="#卡牌" class="headerlink" title="卡牌"></a>卡牌</h5><p>卡牌类是抽象类<code>AbstractCard</code>的子类，需要在被定义后在注册类中注册。它包括的抽象方法有两个，<code>use()</code>与<code>upgrade()</code>。前者在卡牌被使用时调用，而后者在卡牌被升级时调用。</p>
+<p>卡牌被使用&#x2F;触发效果时，一般都会触发一个或多个<strong>动作（action）</strong>。动作留待后面叙述，这里主要讲卡牌相关的功能大致是怎么实现的。</p>
+<p><code>CustomCard</code>的父类<code>AbstractCard</code>预定义了大量的函数与内置钩子供开发者自己与mod作者使用。这些函数与钩子囊括了大量的相关功能，包括但不限于规定此卡在本回合中的耗能（<code>setCostForTurn()</code>），规定此卡可以被打出的条件(<code>canUse()</code>)，在主动丢弃此卡时触发特定效果（<code>triggerOnManualDiscard()</code>）等等。而这些函数或钩子只需要在对应子类中调用或覆写即可使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//战士哥基础打击的源代码</span></span><br><span class="line"><span class="comment">//包名以及导入的依赖类</span></span><br><span class="line"><span class="keyword">package</span> com.megacrit.cardcrawl.cards.red;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.AbstractGameAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.common.DamageAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.cards.AbstractCard;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.cards.DamageInfo;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.characters.AbstractPlayer;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.AbstractCreature;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.CardCrawlGame;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.Settings;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.dungeons.AbstractDungeon;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.localization.CardStrings;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.monsters.AbstractMonster;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Strike_Red</span> <span class="keyword">extends</span> <span class="title class_">AbstractCard</span> &#123;<span class="comment">//注意，此处继承的是基本的AbstractCard类，mod作者在此处应继承已封装的CustomCard类</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ID</span> <span class="operator">=</span> <span class="string">&quot;Strike_R&quot;</span>;<span class="comment">//规定卡牌ID</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">CardStrings</span> <span class="variable">cardStrings</span> <span class="operator">=</span> CardCrawlGame.languagePack.getCardStrings(<span class="string">&quot;Strike_R&quot;</span>);<span class="comment">//从本地化文件中获取对应文本</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Strike_Red</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(<span class="string">&quot;Strike_R&quot;</span>, cardStrings.NAME, <span class="string">&quot;red/attack/strike&quot;</span>, <span class="number">1</span>, cardStrings.DESCRIPTION, AbstractCard.CardType.ATTACK, AbstractCard.CardColor.RED, AbstractCard.CardRarity.BASIC, AbstractCard.CardTarget.ENEMY);<span class="comment">//构造函数。其中的参数分别为：ID，卡牌名称，卡图路径，耗能，卡牌描述，卡牌类型，卡牌颜色，卡牌稀有度，卡牌目标</span></span><br><span class="line">    <span class="built_in">this</span>.baseDamage = <span class="number">6</span>;<span class="comment">//规定卡牌基础伤害值，这个数值并不是最终的伤害值，需要送进calculateCardDamage()函数里计算出最终的this.damage</span></span><br><span class="line">    <span class="built_in">this</span>.tags.add(AbstractCard.CardTags.STRIKE);<span class="comment">//加打击标签，某些东西（如完美打击）要用</span></span><br><span class="line">    <span class="built_in">this</span>.tags.add(AbstractCard.CardTags.STARTER_STRIKE);<span class="comment">//加基础打击标签，某些东西（如打击木偶）要用</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">use</span><span class="params">(AbstractPlayer p, AbstractMonster m)</span> &#123;<span class="comment">//使用时调用的函数</span></span><br><span class="line">    <span class="keyword">if</span> (Settings.isDebug) &#123;<span class="comment">//这个判断条件下的代码仅供测试使用，mod编写时无需考虑</span></span><br><span class="line">      <span class="keyword">if</span> (Settings.isInfo) &#123;<span class="comment">//群伤150，估计是测试时秒杀用的</span></span><br><span class="line">        <span class="built_in">this</span>.multiDamage = <span class="keyword">new</span> <span class="title class_">int</span>[(AbstractDungeon.getCurrRoom()).monsters.monsters.size()];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; (AbstractDungeon.getCurrRoom()).monsters.monsters.size(); i++)</span><br><span class="line">          <span class="built_in">this</span>.multiDamage[i] = <span class="number">150</span>; </span><br><span class="line">        addToBot((AbstractGameAction)<span class="keyword">new</span> <span class="title class_">DamageAllEnemiesAction</span>((AbstractCreature)p, <span class="built_in">this</span>.multiDamage, <span class="built_in">this</span>.damageTypeForTurn, AbstractGameAction.AttackEffect.SLASH_DIAGONAL));</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        addToBot((AbstractGameAction)<span class="keyword">new</span> <span class="title class_">DamageAction</span>((AbstractCreature)m, <span class="keyword">new</span> <span class="title class_">DamageInfo</span>((AbstractCreature)p, <span class="number">150</span>, <span class="built_in">this</span>.damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));</span><br><span class="line">      &#125; </span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;<span class="comment">//这里才是打击的一般效果，效果为在动作管理器的底部加入一个新的伤害动作</span></span><br><span class="line">      addToBot((AbstractGameAction)<span class="keyword">new</span> <span class="title class_">DamageAction</span>((AbstractCreature)m, <span class="keyword">new</span> <span class="title class_">DamageInfo</span>((AbstractCreature)p, <span class="built_in">this</span>.damage, <span class="built_in">this</span>.damageTypeForTurn), AbstractGameAction.AttackEffect.SLASH_DIAGONAL));</span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">upgrade</span><span class="params">()</span> &#123;<span class="comment">//升级时调用的函数</span></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">this</span>.upgraded) &#123;<span class="comment">//如果卡牌尚未升级</span></span><br><span class="line">      upgradeName();<span class="comment">//更改名称，打击变成打击+</span></span><br><span class="line">      upgradeDamage(<span class="number">3</span>);<span class="comment">//增加3点伤害</span></span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> AbstractCard <span class="title function_">makeCopy</span><span class="params">()</span> &#123;<span class="comment">//复制（如双持等）时调用的函数，mod作者可以用来整点小花活，但正常情况下返回自己的一个新对象就可以了（继承CustomCard的情况下无需覆写这个函数）</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Strike_Red</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//我人物mod里的一张卡的相关代码，这张卡的内容是：技能·不能被打出。抽到这张牌时抽2（3）张牌。回忆：触发回忆时，抽2（3）张牌，然后将此牌返回手牌。（回忆：在手牌中时，满足条件便触发效果并消耗。）</span></span><br><span class="line"><span class="comment">//包名依赖省略</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TrapLoop</span> <span class="keyword">extends</span> <span class="title class_">CustomCard</span> <span class="keyword">implements</span> <span class="title class_">AbstractMemoryCard</span> &#123;<span class="comment">//这里使用了一个自定义接口，这个接口中的memory()函数会在合适的时机被调用</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ID</span> <span class="operator">=</span> YsyModHelper.MakePath(TrapLoop.class.getSimpleName());<span class="comment">//卡牌ID</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">CardStrings</span> <span class="variable">cardStrings</span> <span class="operator">=</span> CardCrawlGame.languagePack.getCardStrings(ID);<span class="comment">//卡牌文本</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">NAME</span> <span class="operator">=</span> cardStrings.NAME;<span class="comment">//卡牌名</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">DESCRIPTION</span> <span class="operator">=</span> cardStrings.DESCRIPTION;<span class="comment">//描述</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">IMG_PATH</span> <span class="operator">=</span> <span class="string">&quot;img/cards/TrapLoop.png&quot;</span>;<span class="comment">//图片</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">COST</span> <span class="operator">=</span> -<span class="number">2</span>;<span class="comment">//花费。-2为不能被打出，-1为x费。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">CardType</span> <span class="variable">CARD_TYPE</span> <span class="operator">=</span> CardType.SKILL;<span class="comment">//类型，技能。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">CardColor</span> <span class="variable">COLOR</span> <span class="operator">=</span> AbstractCardEnum.xxx_COLOR;<span class="comment">//颜色。这里的颜色在另一个文件中被@SpireEnum注解标明。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">CardRarity</span> <span class="variable">CARD_RARITY</span> <span class="operator">=</span> CardRarity.UNCOMMON;<span class="comment">//稀有度。罕见。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TrapLoop</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(NAME, cardStrings.NAME, IMG_PATH, COST, DESCRIPTION, CARD_TYPE,</span><br><span class="line">                COLOR, CARD_RARITY, CardTarget.NONE);</span><br><span class="line">        <span class="built_in">this</span>.baseMagicNumber = <span class="number">2</span>;<span class="comment">//基础魔法数字。所谓魔法数字，一般就是卡牌中除打防数值之外的数字。</span></span><br><span class="line">        <span class="built_in">this</span>.magicNumber = <span class="built_in">this</span>.baseMagicNumber;<span class="comment">//魔法数字初始化</span></span><br><span class="line">        tags.add(CardTagsEnum.WHEN_MEMORY);<span class="comment">//特殊标签（回忆时触发），这里其实用回调函数实现更好，但懒得做优化了</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">use</span><span class="params">(AbstractPlayer p, AbstractMonster m)</span> &#123;<span class="comment">//卡牌不能被使用，这里的代码一般来说没有机会被调用</span></span><br><span class="line">        <span class="built_in">this</span>.addToBot(<span class="keyword">new</span> <span class="title class_">DrawCardAction</span>(p, <span class="built_in">this</span>.magicNumber));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canUse</span><span class="params">(AbstractPlayer p, AbstractMonster m)</span> &#123;<span class="comment">//能否使用</span></span><br><span class="line">        <span class="built_in">this</span>.cantUseMessage = cardStrings.EXTENDED_DESCRIPTION[<span class="number">0</span>];<span class="comment">//试图使用时角色会说一段话，在这里特殊定义</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//不能使用返回false</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">triggerWhenDrawn</span><span class="params">()</span> &#123;<span class="comment">//抽到时触发</span></span><br><span class="line">        <span class="built_in">this</span>.addToBot(<span class="keyword">new</span> <span class="title class_">DrawCardAction</span>(AbstractDungeon.player, <span class="built_in">this</span>.magicNumber));<span class="comment">//抽2（3）张牌的动作</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">memory</span><span class="params">()</span> &#123;<span class="comment">//触发回忆时触发的函数</span></span><br><span class="line">        AbstractDungeon.actionManager.addToBottom(<span class="keyword">new</span> <span class="title class_">UnExhaustAction</span>(<span class="built_in">this</span>));<span class="comment">//这里借用了replayerthespire中的相关代码，没错说的就是你地狱打击</span></span><br><span class="line">        AbstractDungeon.actionManager.addToTop(<span class="keyword">new</span> <span class="title class_">DrawCardAction</span>(AbstractDungeon.player, <span class="built_in">this</span>.magicNumber));<span class="comment">//抽2（3）张牌</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> AbstractCard <span class="title function_">makeCopy</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TrapLoop</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">upgrade</span><span class="params">()</span> &#123;<span class="comment">//升级</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">this</span>.upgraded) &#123;</span><br><span class="line">            <span class="built_in">this</span>.upgradeName();<span class="comment">//修改名称</span></span><br><span class="line">            <span class="built_in">this</span>.upgradeMagicNumber(<span class="number">1</span>);<span class="comment">//将魔法数字提升1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="遗物"><a href="#遗物" class="headerlink" title="遗物"></a>遗物</h5><p>遗物是抽象类<code>AbstractRelic</code>的子类，不包含抽象方法。它的相关定义与卡牌类似，都是相关图片文本资源+定义属性+相关效果。遗物在定义后也需要在注册类中注册。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//破损核心</span></span><br><span class="line"><span class="keyword">package</span> com.megacrit.cardcrawl.relics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.dungeons.AbstractDungeon;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.orbs.AbstractOrb;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.orbs.Lightning;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CrackedCore</span> <span class="keyword">extends</span> <span class="title class_">AbstractRelic</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ID</span> <span class="operator">=</span> <span class="string">&quot;Cracked Core&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">CrackedCore</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(<span class="string">&quot;Cracked Core&quot;</span>, <span class="string">&quot;crackedOrb.png&quot;</span>, AbstractRelic.RelicTier.STARTER, AbstractRelic.LandingSound.CLINK);<span class="comment">//遗物名称，遗物图片，遗物稀有度，遗物查看时的音效</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getUpdatedDescription</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.DESCRIPTIONS[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">atPreBattle</span><span class="params">()</span> &#123;<span class="comment">//战斗开始前</span></span><br><span class="line">    AbstractDungeon.player.channelOrb((AbstractOrb)<span class="keyword">new</span> <span class="title class_">Lightning</span>());<span class="comment">//生成一个闪电充能球</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> AbstractRelic <span class="title function_">makeCopy</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CrackedCore</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>遗物的实现方式与效果也多种多样，许多遗物的效果实际上并没有在本文件中说明，而是在对应的地方加入新的代码来实现的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//灵体外质，这里只能看出生成条件与加一费</span></span><br><span class="line"><span class="keyword">package</span> com.megacrit.cardcrawl.relics;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.characters.AbstractPlayer;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.dungeons.AbstractDungeon;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.helpers.PowerTip;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Ectoplasm</span> <span class="keyword">extends</span> <span class="title class_">AbstractRelic</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">ID</span> <span class="operator">=</span> <span class="string">&quot;Ectoplasm&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">Ectoplasm</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(<span class="string">&quot;Ectoplasm&quot;</span>, <span class="string">&quot;ectoplasm.png&quot;</span>, AbstractRelic.RelicTier.BOSS, AbstractRelic.LandingSound.FLAT);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> String <span class="title function_">getUpdatedDescription</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (AbstractDungeon.player != <span class="literal">null</span>)</span><br><span class="line">      <span class="keyword">return</span> setDescription(AbstractDungeon.player.chosenClass); </span><br><span class="line">    <span class="keyword">return</span> setDescription((AbstractPlayer.PlayerClass)<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> String <span class="title function_">setDescription</span><span class="params">(AbstractPlayer.PlayerClass c)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.DESCRIPTIONS[<span class="number">1</span>] + <span class="built_in">this</span>.DESCRIPTIONS[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateDescription</span><span class="params">(AbstractPlayer.PlayerClass c)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.description = setDescription(c);</span><br><span class="line">    <span class="built_in">this</span>.tips.clear();</span><br><span class="line">    <span class="built_in">this</span>.tips.add(<span class="keyword">new</span> <span class="title class_">PowerTip</span>(<span class="built_in">this</span>.name, <span class="built_in">this</span>.description));</span><br><span class="line">    initializeTips();</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onEquip</span><span class="params">()</span> &#123;<span class="comment">//获得后加一费</span></span><br><span class="line">    AbstractDungeon.player.energy.energyMaster++;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onUnequip</span><span class="params">()</span> &#123;<span class="comment">//失去时减回去</span></span><br><span class="line">    AbstractDungeon.player.energy.energyMaster--;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">canSpawn</span><span class="params">()</span> &#123;<span class="comment">//只能在一层生成</span></span><br><span class="line">    <span class="keyword">if</span> (AbstractDungeon.actNum &gt; <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> AbstractRelic <span class="title function_">makeCopy</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Ectoplasm</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//而它不能获得金币的效果实际上在AbstractPlayer类的gainGold()方法中</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">gainGold</span><span class="params">(<span class="type">int</span> amount)</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.hasRelic(<span class="string">&quot;Ectoplasm&quot;</span>)) &#123;<span class="comment">//如果有灵体外质</span></span><br><span class="line">         <span class="built_in">this</span>.getRelic(<span class="string">&quot;Ectoplasm&quot;</span>).flash();<span class="comment">//遗物闪一下，并取消加金币</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="keyword">if</span> (amount &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            logger.info(<span class="string">&quot;NEGATIVE MONEY???&quot;</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            CardCrawlGame.goldGained += amount;</span><br><span class="line">            <span class="built_in">this</span>.gold += amount;<span class="comment">//这里才是加金币</span></span><br><span class="line">            <span class="type">Iterator</span> <span class="variable">var2</span> <span class="operator">=</span> <span class="built_in">this</span>.relics.iterator();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(var2.hasNext()) &#123;</span><br><span class="line">               <span class="type">AbstractRelic</span> <span class="variable">r</span> <span class="operator">=</span> (AbstractRelic)var2.next();</span><br><span class="line">               r.onGainGold();<span class="comment">//触发所有遗物的“获得金币时”效果</span></span><br><span class="line">            &#125;</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么自定义的卡牌遗物等如何加入新的效果呢？一般有两个方法：</p>
+<ul>
+<li><p>一个是使用basemod增添的钩子在特定条件中加入触发的效果（如<code>PostBattleSubscriber</code>钩子的回调函数<code>receivePostBattle()</code>中的代码在注册此钩子后会在战斗开始前运行）；</p>
+</li>
+<li><p>如果basemod也没有相关的钩子，可以使用<code>SpirePatch</code>在尖塔源代码中插入一段特定的代码。</p>
+</li>
+</ul>
+<p>不过这些功能就比较复杂了，可以先去看看上面的教程和文档（</p>
+<h5 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h5><p>动作是<code>AbstractGameAction</code>的子类，有一个抽象函数<code>update()</code>，在动作执行时被调用。它一般是一段特定的效果，在对应的时机被调用，加入尖塔的动作管理器（actionManager）中。它的意义是对一段常用或会触发其他东西的效果进行封装。动作不需要在注册类中注册，在合适的时机调用即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原版消耗特定数量卡的动作</span></span><br><span class="line"><span class="keyword">package</span> com.megacrit.cardcrawl.actions.common;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.AbstractGameAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.cards.AbstractCard;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.characters.AbstractPlayer;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.AbstractCreature;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.CardCrawlGame;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.Settings;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.dungeons.AbstractDungeon;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.localization.UIStrings;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ExhaustAction</span> <span class="keyword">extends</span> <span class="title class_">AbstractGameAction</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">UIStrings</span> <span class="variable">uiStrings</span> <span class="operator">=</span> CardCrawlGame.languagePack.getUIString(<span class="string">&quot;ExhaustAction&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] TEXT = uiStrings.TEXT;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> AbstractPlayer p;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">boolean</span> isRandom;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">boolean</span> anyNumber;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">boolean</span> canPickZero;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span> numExhausted;</span><br><span class="line">  <span class="comment">//以下为各种参数的构造函数</span></span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(<span class="type">int</span> amount, <span class="type">boolean</span> isRandom, <span class="type">boolean</span> anyNumber, <span class="type">boolean</span> canPickZero)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.anyNumber = anyNumber;<span class="comment">//是否任意数量</span></span><br><span class="line">    <span class="built_in">this</span>.p = AbstractDungeon.player;<span class="comment">//玩家</span></span><br><span class="line">    <span class="built_in">this</span>.canPickZero = canPickZero;<span class="comment">//是否可以选0个</span></span><br><span class="line">    <span class="built_in">this</span>.isRandom = isRandom;<span class="comment">//是否是随机的</span></span><br><span class="line">    <span class="built_in">this</span>.amount = amount;<span class="comment">//消耗的数量</span></span><br><span class="line">    <span class="built_in">this</span>.duration = <span class="built_in">this</span>.startDuration = Settings.ACTION_DUR_FAST;<span class="comment">//设置相关的配置</span></span><br><span class="line">    <span class="built_in">this</span>.actionType = AbstractGameAction.ActionType.EXHAUST;<span class="comment">//动作类型</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(AbstractCreature target, AbstractCreature source, <span class="type">int</span> amount, <span class="type">boolean</span> isRandom, <span class="type">boolean</span> anyNumber)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(amount, isRandom, anyNumber);</span><br><span class="line">    <span class="built_in">this</span>.target = target;</span><br><span class="line">    <span class="built_in">this</span>.source = source;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(AbstractCreature target, AbstractCreature source, <span class="type">int</span> amount, <span class="type">boolean</span> isRandom)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(amount, isRandom, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">this</span>.target = target;</span><br><span class="line">    <span class="built_in">this</span>.source = source;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(AbstractCreature target, AbstractCreature source, <span class="type">int</span> amount, <span class="type">boolean</span> isRandom, <span class="type">boolean</span> anyNumber, <span class="type">boolean</span> canPickZero)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(amount, isRandom, anyNumber, canPickZero);</span><br><span class="line">    <span class="built_in">this</span>.target = target;</span><br><span class="line">    <span class="built_in">this</span>.source = source;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(<span class="type">boolean</span> isRandom, <span class="type">boolean</span> anyNumber, <span class="type">boolean</span> canPickZero)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(<span class="number">99</span>, isRandom, anyNumber, canPickZero);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(<span class="type">int</span> amount, <span class="type">boolean</span> canPickZero)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(amount, <span class="literal">false</span>, <span class="literal">false</span>, canPickZero);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(<span class="type">int</span> amount, <span class="type">boolean</span> isRandom, <span class="type">boolean</span> anyNumber)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(amount, isRandom, anyNumber, <span class="literal">false</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">ExhaustAction</span><span class="params">(<span class="type">int</span> amount, <span class="type">boolean</span> isRandom, <span class="type">boolean</span> anyNumber, <span class="type">boolean</span> canPickZero, <span class="type">float</span> duration)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>(amount, isRandom, anyNumber, canPickZero);</span><br><span class="line">    <span class="built_in">this</span>.duration = <span class="built_in">this</span>.startDuration = duration;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;<span class="comment">//动作在执行时实际调用的函数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.duration == <span class="built_in">this</span>.startDuration) &#123;<span class="comment">//某项配置</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.p.hand.size() == <span class="number">0</span>) &#123;<span class="comment">//如果手牌数为0</span></span><br><span class="line">        <span class="built_in">this</span>.isDone = <span class="literal">true</span>;<span class="comment">//直接结束。isDone被标为true的动作会在接下来被清除动作队列。</span></span><br><span class="line">        <span class="keyword">return</span>;<span class="comment">//结束</span></span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">this</span>.anyNumber &amp;&amp; </span><br><span class="line">        <span class="built_in">this</span>.p.hand.size() &lt;= <span class="built_in">this</span>.amount) &#123;<span class="comment">//如果不是任选，且手牌数小于消耗数</span></span><br><span class="line">        <span class="built_in">this</span>.amount = <span class="built_in">this</span>.p.hand.size();</span><br><span class="line">        numExhausted = <span class="built_in">this</span>.amount;</span><br><span class="line">        <span class="type">int</span> <span class="variable">tmp</span> <span class="operator">=</span> <span class="built_in">this</span>.p.hand.size();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; tmp; i++) &#123;<span class="comment">//实际上就是挨个消耗所有手牌</span></span><br><span class="line">          <span class="type">AbstractCard</span> <span class="variable">c</span> <span class="operator">=</span> <span class="built_in">this</span>.p.hand.getTopCard();</span><br><span class="line">          <span class="built_in">this</span>.p.hand.moveToExhaustPile(c);</span><br><span class="line">        &#125; </span><br><span class="line">        CardCrawlGame.dungeon.checkForPactAchievement();<span class="comment">//似乎是某项成就</span></span><br><span class="line">        <span class="keyword">return</span>;<span class="comment">//结束</span></span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.isRandom) &#123;<span class="comment">//如果随机消耗</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="built_in">this</span>.amount; i++)</span><br><span class="line">          <span class="built_in">this</span>.p.hand.moveToExhaustPile(<span class="built_in">this</span>.p.hand.getRandomCard(AbstractDungeon.cardRandomRng)); <span class="comment">//随机消耗手牌</span></span><br><span class="line">        CardCrawlGame.dungeon.checkForPactAchievement();</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;<span class="comment">//如果要选</span></span><br><span class="line">        numExhausted = <span class="built_in">this</span>.amount;</span><br><span class="line">        AbstractDungeon.handCardSelectScreen.open(TEXT[<span class="number">0</span>], <span class="built_in">this</span>.amount, <span class="built_in">this</span>.anyNumber, <span class="built_in">this</span>.canPickZero);<span class="comment">//打开选卡屏幕</span></span><br><span class="line">        tickDuration();<span class="comment">//度过一帧后标记为解决</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">if</span> (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) &#123;<span class="comment">//选择未解决</span></span><br><span class="line">      <span class="keyword">for</span> (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group)</span><br><span class="line">        <span class="built_in">this</span>.p.hand.moveToExhaustPile(c); <span class="comment">//选择的卡全进消耗堆</span></span><br><span class="line">      CardCrawlGame.dungeon.checkForPactAchievement();</span><br><span class="line">      AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = <span class="literal">true</span>;<span class="comment">//选择标记为已解决</span></span><br><span class="line">    &#125; </span><br><span class="line">    tickDuration();<span class="comment">//度过一帧后标记为解决</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在其他地方（如卡牌遗物代码中），只需要<code>addToBot()</code>或<code>addToTop()</code>即可把对应动作加入动作队列的底部&#x2F;顶部。游戏会从上往下依次处理这些事件。</p>
+<h5 id="能力"><a href="#能力" class="headerlink" title="能力"></a>能力</h5><p>能力是抽象类<code>AbstractPower</code>的子类，没有抽象方法。它的实现方法和卡牌遗物类似，也是图片文本素材+特定效果。不过某些效果可能比较难以实现。。。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//战士第一卡，腐化对应的能力</span></span><br><span class="line"><span class="keyword">package</span> com.megacrit.cardcrawl.powers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.utility.UseCardAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.cards.AbstractCard;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.AbstractCreature;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.CardCrawlGame;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.localization.PowerStrings;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CorruptionPower</span> <span class="keyword">extends</span> <span class="title class_">AbstractPower</span> &#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">POWER_ID</span> <span class="operator">=</span> <span class="string">&quot;Corruption&quot;</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">PowerStrings</span> <span class="variable">powerStrings</span> <span class="operator">=</span> CardCrawlGame.languagePack.getPowerStrings(<span class="string">&quot;Corruption&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">NAME</span> <span class="operator">=</span> powerStrings.NAME;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">CorruptionPower</span><span class="params">(AbstractCreature owner)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.name = NAME;</span><br><span class="line">    <span class="built_in">this</span>.ID = <span class="string">&quot;Corruption&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.owner = owner;</span><br><span class="line">    <span class="built_in">this</span>.amount = -<span class="number">1</span>;<span class="comment">//这里指定为-1表示该能力无法叠加</span></span><br><span class="line">    <span class="built_in">this</span>.description = DESCRIPTIONS[<span class="number">0</span>];</span><br><span class="line">    loadRegion(<span class="string">&quot;corruption&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateDescription</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.description = DESCRIPTIONS[<span class="number">1</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onCardDraw</span><span class="params">(AbstractCard card)</span> &#123;<span class="comment">//抽到卡牌时</span></span><br><span class="line">    <span class="keyword">if</span> (card.type == AbstractCard.CardType.SKILL)<span class="comment">//如果此牌为技能牌</span></span><br><span class="line">      card.setCostForTurn(-<span class="number">9</span>); <span class="comment">//设置临时花费为-9</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onUseCard</span><span class="params">(AbstractCard card, UseCardAction action)</span> &#123;<span class="comment">//使用卡牌时</span></span><br><span class="line">    <span class="keyword">if</span> (card.type == AbstractCard.CardType.SKILL) &#123;<span class="comment">//如果此牌为能力牌</span></span><br><span class="line">      flash();<span class="comment">//闪一下</span></span><br><span class="line">      action.exhaustCard = <span class="literal">true</span>;<span class="comment">//消耗此牌</span></span><br><span class="line">    &#125; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而腐化的实现远没有看起来那么简单。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//摘自原版ShowCardAndAddToHandEffect.class的一个构造函数</span></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">ShowCardAndAddToHandEffect</span><span class="params">(AbstractCard card, <span class="type">float</span> offsetX, <span class="type">float</span> offsetY)</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.card = card;</span><br><span class="line">      UnlockTracker.markCardAsSeen(card.cardID);</span><br><span class="line">      card.current_x = (<span class="type">float</span>)Settings.WIDTH / <span class="number">2.0F</span>;</span><br><span class="line">      card.current_y = (<span class="type">float</span>)Settings.HEIGHT / <span class="number">2.0F</span>;</span><br><span class="line">      card.target_x = offsetX;</span><br><span class="line">      card.target_y = offsetY;</span><br><span class="line">      <span class="built_in">this</span>.duration = <span class="number">0.8F</span>;</span><br><span class="line">      card.drawScale = <span class="number">0.75F</span>;</span><br><span class="line">      card.targetDrawScale = <span class="number">0.75F</span>;</span><br><span class="line">      card.transparency = <span class="number">0.01F</span>;</span><br><span class="line">      card.targetTransparency = <span class="number">1.0F</span>;</span><br><span class="line">      card.fadingOut = <span class="literal">false</span>;</span><br><span class="line">      <span class="built_in">this</span>.playCardObtainSfx();</span><br><span class="line">      <span class="keyword">if</span> (card.type != CardType.CURSE &amp;&amp; card.type != CardType.STATUS &amp;&amp; AbstractDungeon.player.hasPower(<span class="string">&quot;MasterRealityPower&quot;</span>)) &#123;<span class="comment">//操控现实</span></span><br><span class="line">         card.upgrade();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      AbstractDungeon.player.hand.addToHand(card);</span><br><span class="line">      card.triggerWhenCopied();</span><br><span class="line">      AbstractDungeon.player.hand.refreshHandLayout();</span><br><span class="line">      AbstractDungeon.player.hand.applyPowers();</span><br><span class="line">      AbstractDungeon.player.onCardDrawOrDiscard();</span><br><span class="line">      <span class="keyword">if</span> (AbstractDungeon.player.hasPower(<span class="string">&quot;Corruption&quot;</span>) &amp;&amp; card.type == CardType.SKILL) &#123;<span class="comment">//腐化</span></span><br><span class="line">         card.setCostForTurn(-<span class="number">9</span>);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里实际上就是让战斗中临时加入的卡牌也能吃到腐化的减费效果。而操控现实也类似。</p>
+<p>然而游戏中的类似动作或效果实际上远不止这一个，而这些东西都要加上腐化、操控现实之类的判断，于是相关效果的实现实际上是非常麻烦且极其容易出bug的。</p>
+<p>官方和basemod都没有提供相关钩子，这感觉也是很难看见mod里有类似设计的原因。。。（不过还是有的）</p>
+<h2 id="其他感想"><a href="#其他感想" class="headerlink" title="其他感想"></a>其他感想</h2><p>总的来说，游戏的逻辑跟我原来想当然的完全不一样。我跟你讲逻辑，你跟我讲遍历，许多看似高大上的效果说到底还是在特定地方加个特定条件然后遍历而已。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//basemod中注册钩子的相关代码，实际上就是挨个判断然后加进对应数组里</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">subscribe</span><span class="params">(ISubscriber sub, Class&lt;? extends ISubscriber&gt; additionClass)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (additionClass.equals(StartActSubscriber.class)) &#123;</span><br><span class="line">      startActSubscribers.add((StartActSubscriber)sub);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (additionClass.equals(PostCampfireSubscriber.class)) &#123;</span><br><span class="line">      postCampfireSubscribers.add((PostCampfireSubscriber)sub);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (additionClass.equals(PostDrawSubscriber.class)) &#123;</span><br><span class="line">      postDrawSubscribers.add((PostDrawSubscriber)sub);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//以下省略一万字</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那这些钩子是在哪起作用的呢？这里举个例子。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下代码摘自basemod中的特定文件</span></span><br><span class="line"><span class="comment">//ApplyPowerActionPostPowerApplyHook.class，名字挺长实际上就是在ApplyPowerAction中插了一段用于触发钩子的代码</span></span><br><span class="line"><span class="meta">@SpirePatch(cls = &quot;com.megacrit.cardcrawl.actions.common.ApplyPowerAction&quot;, method = &quot;update&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ApplyPowerActionPostPowerApplyHook</span> &#123;</span><br><span class="line">  <span class="meta">@SpireInsertPatch(rloc = 6, localvars = &#123;&quot;powerToApply&quot;, &quot;target&quot;, &quot;source&quot;&#125;)</span><span class="comment">//插入定位</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">Insert</span><span class="params">(ApplyPowerAction apa, AbstractPower powerToApply, AbstractCreature target, AbstractCreature source)</span> &#123;</span><br><span class="line">    BaseMod.publishPostPowerApply(powerToApply, target, source);<span class="comment">//触发钩子</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//那这个publishPostPowerApply()又是个啥？</span></span><br><span class="line"><span class="comment">//basemod.class</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">publishPostPowerApply</span><span class="params">(AbstractPower p, AbstractCreature target, AbstractCreature source)</span> &#123;</span><br><span class="line">    logger.info(<span class="string">&quot;publish on post power apply&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (PostPowerApplySubscriber sub : postPowerApplySubscribers)<span class="comment">//遍历钩子</span></span><br><span class="line">      sub.receivePostPowerApplySubscriber(p, target, source); <span class="comment">//触发钩子</span></span><br><span class="line">    unsubscribeLaterHelper((Class)PostPowerApplySubscriber.class);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>总的来说还是遍历。</p>
+<p>有人说尖塔不过是一个带动画的计算器而已，这种说法确实有道理，不过有的代码里面还是有惊喜的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//崩坠mod中枪手神抽调用的动作。神抽：罕见·1·技能：抽牌直到总耗能为3（4）</span></span><br><span class="line"><span class="keyword">package</span> hermit.actions;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.AbstractGameAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.common.DrawCardAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.cards.AbstractCard;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.characters.AbstractPlayer;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.AbstractCreature;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.core.Settings;</span><br><span class="line"><span class="keyword">import</span> com.megacrit.cardcrawl.dungeons.AbstractDungeon;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LuckDrawAction</span> <span class="keyword">extends</span> <span class="title class_">AbstractGameAction</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> AbstractPlayer p;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> AbstractCard.CardType typeToCheck;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> energy;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">private</span> <span class="type">int</span> <span class="variable">tracker</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="title function_">LuckDrawAction</span><span class="params">(<span class="type">int</span> energy)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.p = AbstractDungeon.player;</span><br><span class="line">    setValues((AbstractCreature)<span class="built_in">this</span>.p, (AbstractCreature)<span class="built_in">this</span>.p);</span><br><span class="line">    <span class="built_in">this</span>.actionType = AbstractGameAction.ActionType.CARD_MANIPULATION;</span><br><span class="line">    <span class="built_in">this</span>.duration = Settings.ACTION_DUR_MED;</span><br><span class="line">    <span class="built_in">this</span>.typeToCheck = AbstractCard.CardType.CURSE;</span><br><span class="line">    <span class="built_in">this</span>.energy = energy;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.duration == Settings.ACTION_DUR_MED) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span>.tracker &gt;= <span class="built_in">this</span>.energy || (<span class="built_in">this</span>.p.drawPile.isEmpty() &amp;&amp; <span class="built_in">this</span>.p.discardPile.isEmpty()) || <span class="built_in">this</span>.p.hand.size() &gt;= <span class="number">10</span>) &#123;<span class="comment">//追踪量大于总能量数目（3/4）或抽牌弃牌堆皆空或手牌满了（不过这里有点小问题，应该用BaseMod.MAX_HAND_SIZE代替10以保证兼容性）</span></span><br><span class="line">        <span class="built_in">this</span>.isDone = <span class="literal">true</span>;<span class="comment">//结束动作</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">if</span> (AbstractDungeon.player.hasPower(<span class="string">&quot;No Draw&quot;</span>)) &#123;<span class="comment">//如果玩家有无法抽牌的能力</span></span><br><span class="line">        AbstractDungeon.player.getPower(<span class="string">&quot;No Draw&quot;</span>).flash();<span class="comment">//能力闪一下</span></span><br><span class="line">        <span class="built_in">this</span>.isDone = <span class="literal">true</span>;<span class="comment">//结束动作</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">if</span> (!<span class="built_in">this</span>.p.drawPile.isEmpty()) &#123;<span class="comment">//抽牌堆不为空</span></span><br><span class="line">        <span class="type">AbstractCard</span> <span class="variable">c</span> <span class="operator">=</span> AbstractDungeon.player.drawPile.group.get(AbstractDungeon.player.drawPile.size() - <span class="number">1</span>);<span class="comment">//提取抽牌堆最后一张卡</span></span><br><span class="line">        <span class="keyword">if</span> (c.cost &gt; <span class="number">0</span>)<span class="comment">//耗能大于0的话</span></span><br><span class="line">          <span class="built_in">this</span>.tracker += c.cost; <span class="comment">//追踪量加上它的耗能</span></span><br><span class="line">        addToTop(<span class="keyword">new</span> <span class="title class_">LuckDrawAction</span>(<span class="built_in">this</span>.energy - <span class="built_in">this</span>.tracker));<span class="comment">//递归调用自身，传入总能量减去当前追踪量</span></span><br><span class="line">        addToTop((AbstractGameAction)<span class="keyword">new</span> <span class="title class_">DrawCardAction</span>(<span class="number">1</span>));<span class="comment">//把这张牌抽上来</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;<span class="comment">//否则直接递归并抽牌</span></span><br><span class="line">        addToTop(<span class="keyword">new</span> <span class="title class_">LuckDrawAction</span>(<span class="built_in">this</span>.energy - <span class="built_in">this</span>.tracker));</span><br><span class="line">        addToTop((AbstractGameAction)<span class="keyword">new</span> <span class="title class_">EmptyDeckShuffleAction</span>());</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="built_in">this</span>.isDone = <span class="literal">true</span>;<span class="comment">//结束</span></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    tickDuration();<span class="comment">//度过一帧后结束</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里居然能看见递归，也是惊喜了。</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        无名小卒
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://test.iqimi.top/2023/07/25/杀戮尖塔mod/" title="杀戮尖塔mod开发的二三事">https://test.iqimi.top/2023/07/25/杀戮尖塔mod/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2023/05/31/%E5%B0%8F%E7%99%BD%E7%9A%84%E4%B8%80%E6%AC%A1CTF%E8%A7%A3%E9%A2%98%E8%AE%B0%E5%BD%95/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">小白的一次CTF解题记录</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/05/31</li>
+                <li>19:55</li>
+                <li>CTF</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container" data-scroll data-scroll-offset="50"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": 'qimi142857/mygiscus',
+            "data-repo-id": 'R_kgDOJ4Yr0g',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOJ4Yr0s4CXuCD',
+            "data-mapping": 'url',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.0.0-rc1
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+    
+        <div class="trm-footer-item">
+            <a href="https://icp.gov.moe/?keyword=20221428" target="_blank">萌ICP备20221428号</a>
+        </div>
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/03/2022 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>
