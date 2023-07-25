@@ -19,10 +19,10 @@ https://test.iqimi.top/comment/index.html
 https://test.iqimi.top/
 https://test.iqimi.top/tags/c/
 https://test.iqimi.top/tags/python/
-https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E4%BA%8B%E4%BB%B6/
 https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A%EF%BC%8Cc/
-https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/
+https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E4%BA%8B%E4%BB%B6/
 https://test.iqimi.top/tags/java/
+https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/
 https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A/
 https://test.iqimi.top/categories/%E7%BC%96%E7%A8%8B/
 https://test.iqimi.top/categories/%E6%9E%B6%E7%A9%BA/
