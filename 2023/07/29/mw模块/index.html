@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="mediawiki之基于模块的模板 时间线模板的最终效果 注：此博客站使用的版权协议为CC-BY-SA 4.0，相关代码版权以源站为准。 缘起从参与这个粉丝wiki建设开始，我就想到利用时间线的形式来优化背景信息类条目的叙述。然而我却意外地发现时间线这种东西并没有好用的现成模板，从萌百搬过来的那个是纯文字，其他wiki站上要么没遇见过好用的，要么就是找不到源码。最近又有一位粉丝提出了通过时间线整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mediawiki之基于模块的模板">
+<meta property="og:url" content="https://test.iqimi.top/2023/07/29/mw%E6%A8%A1%E5%9D%97/index.html">
+<meta property="og:site_name" content="无名小传">
+<meta property="og:description" content="mediawiki之基于模块的模板 时间线模板的最终效果 注：此博客站使用的版权协议为CC-BY-SA 4.0，相关代码版权以源站为准。 缘起从参与这个粉丝wiki建设开始，我就想到利用时间线的形式来优化背景信息类条目的叙述。然而我却意外地发现时间线这种东西并没有好用的现成模板，从萌百搬过来的那个是纯文字，其他wiki站上要么没遇见过好用的，要么就是找不到源码。最近又有一位粉丝提出了通过时间线整理">
+<meta property="og:locale">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
+<meta property="article:published_time" content="2023-07-29T13:11:00.000Z">
+<meta property="article:modified_time" content="2023-07-29T14:52:25.626Z">
+<meta property="article:author" content="无名小卒">
+<meta property="article:tag" content="mediawiki">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://test.iqimi.top/img/404.jpg">
+
+
+<title >mediawiki之基于模块的模板</title>
+
+<!-- Favicon -->
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/img/favicon.svg?v=2.0.9' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"test.iqimi.top","author":"无名小卒","root":"/","typed_text":null,"theme_version":"2.0.9","theme":{"switch":true,"default":"style-dark"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-07-29 22:52:25"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.0.0-rc1"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="iconfont far fa-sun"></i></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><i class="iconfont far fa-moon"></i></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/img/favicon.svg">
+    
+    
+        <div class="trm-logo-text">
+            无名<span>小传</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <i class="iconfont far fa-sun"></i>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <i class="iconfont far fa-moon"></i>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="/img/banner.png">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            mediawiki之基于模块的模板
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <i class="iconfont fas fa-user-alt"></i>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <i class="iconfont fas fa-th-list"></i>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        无名小卒
+    </h5>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                Residence:
+            </div>
+            <div class="trm-label trm-label-light">
+                不知何处
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                City:
+            </div>
+            <div class="trm-label trm-label-light">
+                徐扬之地
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                Age:
+            </div>
+            <div class="trm-label trm-label-light">
+                ？
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:qimi285714@outlook.com" class="trm-btn">
+            联系我
+            <i class="iconfont far fa-envelope"></i>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-1"><a rel="nofollow" class="toc-link" href="#mediawiki之基于模块的模板"  data-scroll-to="#mediawiki之基于模块的模板"><span class="toc-number">1.</span> <span class="toc-text">mediawiki之基于模块的模板</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#缘起"  data-scroll-to="#缘起"><span class="toc-number">1.1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#经过"  data-scroll-to="#经过"><span class="toc-number">1.2.</span> <span class="toc-text">经过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#三件套"  data-scroll-to="#三件套"><span class="toc-number">1.2.1.</span> <span class="toc-text">三件套</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#模块-x2F-模板"  data-scroll-to="#模块-x2F-模板"><span class="toc-number">1.2.2.</span> <span class="toc-text">模块&#x2F;模板</span></a></li></ol></li><li class="toc-item toc-level-2"><a rel="nofollow" class="toc-link" href="#结果"  data-scroll-to="#结果"><span class="toc-number">1.3.</span> <span class="toc-text">结果</span></a></li></ol></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-calendar-alt trm-icon"></i><br>
+            07/29
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-clock trm-icon"></i><br>
+            21:11
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <i class="iconfont far fa-user trm-icon"></i><br>
+            无名小卒
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <h1 id="mediawiki之基于模块的模板"><a href="#mediawiki之基于模块的模板" class="headerlink" title="mediawiki之基于模块的模板"></a>mediawiki之基于模块的模板</h1><p><img src="/2023/07/29/mw%E6%A8%A1%E5%9D%97/post.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>时间线模板的最终效果</p>
+<p>注：此博客站使用的版权协议为CC-BY-SA 4.0，相关代码版权以源站为准。</p>
+<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>从参与这个粉丝wiki建设开始，我就想到利用时间线的形式来优化背景信息类条目的叙述。然而我却意外地发现时间线这种东西并没有好用的现成模板，从萌百搬过来的那个是纯文字，其他wiki站上要么没遇见过好用的，要么就是找不到源码。最近又有一位粉丝提出了通过时间线整理漫画剧情的方案，恰好我的那个杀戮尖塔mod项目又处于停顿状态，再加上我在这个wiki站最近的活跃度也不太够，于是就想着自己写一个能用的时间线模板出来。</p>
+<h2 id="经过"><a href="#经过" class="headerlink" title="经过"></a>经过</h2><p>想要写出一个返回非维基文本的模板，基本都要借助模块。而这样的模板一般都有三部分组成：规定逻辑的模块，引用逻辑的模板和规定样式的样式表。</p>
+<p>而这三者分别需要lua、mediawiki和三件套的相关知识。</p>
+<p>这里就分别说明这几项。</p>
+<h3 id="三件套"><a href="#三件套" class="headerlink" title="三件套"></a>三件套</h3><p>在撰写模块之前，我必须先在一个html中先写出类似的效果。而这里并不需要js（逻辑部分是lua那边的事），只需要把静态效果弄出来就可以了。</p>
+<p>本以为这应该是一件不难的事（因为之前有过三件套的开发经验），但实际上手起来才发现跟一开始想的不是一回事。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;timeline&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;trunk&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;branch&quot;</span> <span class="attr">id</span>=<span class="string">&quot;branch-1&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;id&quot;</span>&gt;</span>123话<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">                    仑负着份韩慧十同仇种希，统说韦的名到是冷人，人但说备不书仆可联妄娘，重揽大头不我重不揽的和们么，而话有一你起的狂上小所事措地，统说韦的名到是冷人</span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;branch&quot;</span> <span class="attr">id</span>=<span class="string">&quot;branch-2&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;id&quot;</span>&gt;</span>123话<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">                    仄师用叹拆即,统说韦的名到是冷人</span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;branch&quot;</span> <span class="attr">id</span>=<span class="string">&quot;branch-3&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;id&quot;</span>&gt;</span>123话<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">                    对种榜让畴不今仃，雷爱所的可尘位哉国畴蒲火觉才不由少，战生轻韦如没里人谓第人知，太不投吴畴畴得牛我联求卑方不，行不的争死未宋无舟范他非三同，策花德攻水我洪，别夹太与今事派上交非范价，郭法出馆，兴登后洋时一的两会，不有正十之谓绪药定攻音啦死脱降办仍作锐，是。</span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;branch&quot;</span> <span class="attr">id</span>=<span class="string">&quot;branch-4&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;line&quot;</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;id&quot;</span>&gt;</span>123话<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">                    严陀娟自足仄马土是见场他才不会变，办升他德仑而曰动与魂留足在说，娇老害判愚王同上留有帮洋知家学什少了亲，人宫己是，公那尝被谢龄中是放一子二白不，白恨洪狂竟皇县，衣降王司保间判上评有在未商留价后归，活马令国韩耳持一绝光反同同一家，却发要即官文来问德姑绝褒于。</span><br><span class="line">                    叹和到我国预，皇老耳卧传为，畴生至国人畴忧派的与程张己同选承语，易羊单房自不孔有厅愚饮，位人才楚皇罚谋皇学的我拾范使皇，躲狂游魂的事兴不即为但肯请，君为同当夫，太谷人尹是他感策付目我始你人榜，井老山不普勉处光为疾惊，在帝方孔他，感少为，帝蒲极化乐，投他人。</span><br><span class="line">                    入未有洞有后夹，衣小价偶以的是吞老藏中老他，太所张登挟夫生逃心书，回有谢勉乡乡台反薪时婵身会想，间也恼而承，单今时姑冷幕韩，罪德太读，死人未谓，爱非四朗蒲文韩法斯答方负不，不上得的彷感资同书畴洪房，宋仍未欲准中马她第里为同郭太胜，好人便将普曾，日了上，我。</span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;emptycell&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>html本体也就那么点事，主要的还是css。</p>
+<p>在在布局问题上卡了很久之后，最终采用的布局架构是grid嵌套flex。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.timeline</span> &#123;</span><br><span class="line">		<span class="attribute">display</span>: grid;</span><br><span class="line">		<span class="attribute">grid-template-columns</span>: <span class="number">1</span>fr <span class="number">1</span>fr;</span><br><span class="line">		<span class="attribute">grid-auto-rows</span>: max-content;</span><br><span class="line">		<span class="attribute">gap</span>: <span class="number">5px</span>;</span><br><span class="line">		<span class="attribute">position</span>: relative;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总体的框架。这里将整个空闲区域分为两列，每一行的宽度取决于其中的最大宽度（但实际上似乎用处不大），每个格子间隔5px。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.trunk</span> &#123;</span><br><span class="line">		<span class="attribute">content</span>: <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">		<span class="attribute">position</span>: absolute;</span><br><span class="line">		<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">		<span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">		<span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">5px</span>;</span><br><span class="line">		<span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">50%</span>);</span><br><span class="line">		<span class="attribute">background-color</span>: black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>整个时间线的主干。实际上就是一条黑线，从grid网格的顶部延申到底部。宽设置为5px，<code>transform</code>用于将这条线移到中间。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.branch</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: relative;</span><br><span class="line">		<span class="attribute">display</span>: flex;</span><br><span class="line">		<span class="attribute">justify-content</span>: center;</span><br><span class="line">		justify-items: end;</span><br><span class="line">		<span class="attribute">align-items</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span><span class="selector-class">.branch</span><span class="selector-pseudo">:nth-child</span>(even) &#123;</span><br><span class="line">		<span class="attribute">grid-column-start</span>: -<span class="number">3</span>;</span><br><span class="line">		<span class="attribute">grid-column-end</span>: -<span class="number">2</span>;</span><br><span class="line">		<span class="attribute">justify-content</span>: end;</span><br><span class="line">		<span class="attribute">flex-direction</span>: row-reverse;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span><span class="selector-class">.branch</span><span class="selector-pseudo">:nth-child</span>(odd) &#123;</span><br><span class="line">		<span class="attribute">top</span>: <span class="number">50px</span>;</span><br><span class="line">		<span class="attribute">grid-column-start</span>: -<span class="number">2</span>;</span><br><span class="line">		<span class="attribute">grid-column-end</span>: -<span class="number">1</span>;</span><br><span class="line">		<span class="attribute">justify-content</span>: start;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个分支对应的区域。这里在分支区域使用了弹性盒布局以方便文字与框——线排布。</p>
+<p>偶数位的分支占据右边一列，奇数位的占据左边一列。而弹性盒布局也能利用<code>flex-direction</code>轻松地指定元素左右翻转。同时也为奇偶数位指定分布开始的基准线（<code>justify-content</code>）。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.line</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: relative;</span><br><span class="line">		<span class="attribute">background-color</span>: black;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">2px</span>;</span><br><span class="line">		<span class="attribute">min-width</span>: <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>每个分支中的指示线。没什么好说的。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.text</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: relative;</span><br><span class="line">		<span class="attribute">background-color</span>: transparent;</span><br><span class="line">		<span class="attribute">border</span>: <span class="number">2px</span> solid black;</span><br><span class="line">		<span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">		<span class="attribute">max-width</span>: <span class="number">500px</span>;</span><br><span class="line">		<span class="attribute">padding</span>: <span class="number">5%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实际的文本框。实际运用时背景被设为了白色。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">span</span><span class="selector-class">.id</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: relative;</span><br><span class="line">		<span class="attribute">margin-left</span>: <span class="number">10%</span>;</span><br><span class="line">		<span class="attribute">margin-top</span>: <span class="number">2px</span>;</span><br><span class="line">		<span class="attribute">font-family</span>: <span class="string">&#x27;Gill Sans&#x27;</span>, <span class="string">&#x27;Gill Sans MT&#x27;</span>, Calibri, <span class="string">&#x27;Trebuchet MS&#x27;</span>, sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>指示线上的文本。这里的span是line的子元素，方便对齐。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.emptycell</span> &#123;</span><br><span class="line">		<span class="attribute">max-height</span>: <span class="number">5em</span>;</span><br><span class="line">		<span class="attribute">min-height</span>: <span class="number">3em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>占位符。为什么会有这东西？</p>
+<p>在实际使用中，弹性盒并不会老老实实地待在网格之中，它对文本的自适应会使得其本身脱离网格范围。</p>
+<p><img src="/2023/07/29/mw%E6%A8%A1%E5%9D%97/test1.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>这在单一的网页中并不会导致任何问题，但在实际使用中却出现了严重的出框现象。而这种出框就是因为网格并没有完全包含其中内容。</p>
+<p>在许多次尝试之后，最终的解决方案是，在整个结构的最后加入一个空的占位符，这样就能规避出框现象。</p>
+<p><img src="/2023/07/29/mw%E6%A8%A1%E5%9D%97/test2.png" loading="lazy" onerror='this.onerror=null;this.src="/img/404.jpg"'></p>
+<p>在底部加入一个占位符后的效果，可以看出下面多了一行。</p>
+<p>至此，网页测试部分基本完成。</p>
+<h3 id="模块-x2F-模板"><a href="#模块-x2F-模板" class="headerlink" title="模块&#x2F;模板"></a>模块&#x2F;模板</h3><p>这里主要参考的有：mbox模版，navbox模板，<a target="_blank" rel="noopener" href="https://www.mediawiki.org/wiki/Lua/Scripting">以及mw的官方文档</a>。</p>
+<p>mediawiki的模块是利用lua编写的，而lua也是一项轻量的脚本语言。</p>
+<p>而模块——模板方面真正出问题的点并不在lua本身，而是模块——模板的传参问题上。</p>
+<p>模板本身的实现非常简单，只需要invoke对应的模块并引用对应样式即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;includeonly&gt;&#123;&#123;#invoke: Flow-timeline | timeline&#125;&#125;&lt;/includeonly&gt;&lt;templatestyles src=&quot;T:Flow-timeline/style.css&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如何将模板的参数传到模块中，然后让模块返回内容呢？</p>
+<p>首先是返回。</p>
+<p>这个模板引用的实际意义是，调用模块<code>Flow-timeline</code>中的<code>timeline</code>函数。</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--出于兼容性考虑，这里的类名与上文中的有一定出入</span></span><br><span class="line"><span class="keyword">local</span> data = &#123;&#125;</span><br><span class="line"><span class="keyword">local</span> framework=&#123;&#125;</span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">getId</span><span class="params">(args)</span></span></span><br><span class="line">    <span class="keyword">for</span> key, value <span class="keyword">in</span> <span class="built_in">pairs</span>(args) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> prefix = <span class="built_in">string</span>.<span class="built_in">match</span>(key, <span class="string">&quot;(%a+)%d+&quot;</span>)</span><br><span class="line">        <span class="keyword">local</span> index = <span class="built_in">tonumber</span>(<span class="built_in">string</span>.<span class="built_in">match</span>(key, <span class="string">&quot;%d&quot;</span>))</span><br><span class="line">        <span class="keyword">if</span> index <span class="keyword">and</span> <span class="keyword">not</span> data[index] <span class="keyword">then</span></span><br><span class="line">            data[index] = &#123;&#125;</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> prefix == <span class="string">&quot;text&quot;</span> <span class="keyword">then</span></span><br><span class="line">            data[index][<span class="number">2</span>] = value</span><br><span class="line">        <span class="keyword">elseif</span> prefix == <span class="string">&quot;id&quot;</span> <span class="keyword">then</span></span><br><span class="line">            data[index][<span class="number">1</span>] = value</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">framework.timeline</span><span class="params">(frame)</span></span></span><br><span class="line">    <span class="keyword">local</span> args = frame:getParent().args</span><br><span class="line">    getId(args)</span><br><span class="line">    <span class="keyword">local</span> timeline = mw.html.<span class="built_in">create</span>(<span class="string">&quot;div&quot;</span>)</span><br><span class="line">    timeline:addClass(<span class="string">&quot;timeline-framework&quot;</span>)</span><br><span class="line">    <span class="keyword">local</span> trunk = mw.html.<span class="built_in">create</span>(<span class="string">&quot;div&quot;</span>)</span><br><span class="line">    trunk</span><br><span class="line">        :addClass(<span class="string">&quot;timeline-trunk&quot;</span>)</span><br><span class="line">    timeline:node(trunk)</span><br><span class="line">    <span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">ipairs</span>(data) <span class="keyword">do</span></span><br><span class="line">        <span class="keyword">local</span> branch = mw.html.<span class="built_in">create</span>(<span class="string">&quot;div&quot;</span>)</span><br><span class="line">        branch</span><br><span class="line">            :addClass(<span class="string">&quot;timeline-branch&quot;</span>)</span><br><span class="line">            :attr(<span class="string">&quot;id&quot;</span>,<span class="string">&quot;timeline-branch-&quot;</span> .. index)</span><br><span class="line">        timeline:node(branch)</span><br><span class="line">        <span class="keyword">local</span> line = mw.html.<span class="built_in">create</span>(<span class="string">&quot;div&quot;</span>)</span><br><span class="line">        line</span><br><span class="line">            :addClass(<span class="string">&quot;timeline-line&quot;</span>)</span><br><span class="line">            :attr(<span class="string">&quot;id&quot;</span>,<span class="string">&quot;timeline-line-&quot;</span> .. index)</span><br><span class="line">        branch:node(line)</span><br><span class="line">        <span class="keyword">if</span> value[<span class="number">1</span>] <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">local</span> id = mw.html.<span class="built_in">create</span>(<span class="string">&quot;span&quot;</span>)</span><br><span class="line">            id</span><br><span class="line">                :addClass(<span class="string">&quot;timeline-id&quot;</span>)</span><br><span class="line">                :attr(<span class="string">&quot;id&quot;</span>,<span class="string">&quot;timeline-id-&quot;</span> .. index)</span><br><span class="line">                :wikitext(value[<span class="number">1</span>])</span><br><span class="line">            line:node(id)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">if</span> value[<span class="number">2</span>] <span class="keyword">then</span></span><br><span class="line">            <span class="keyword">local</span> text = mw.html.<span class="built_in">create</span>(<span class="string">&quot;div&quot;</span>)</span><br><span class="line">            text</span><br><span class="line">                :addClass(<span class="string">&quot;timeline-text&quot;</span>)</span><br><span class="line">                :attr(<span class="string">&quot;id&quot;</span>,<span class="string">&quot;timeline-text-&quot;</span> .. index)</span><br><span class="line">                :wikitext(value[<span class="number">2</span>])</span><br><span class="line">            branch:node(text)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">local</span> empty=mw.html.<span class="built_in">create</span>(<span class="string">&quot;div&quot;</span>)</span><br><span class="line">    empty:addClass(<span class="string">&quot;timeline-emptycell&quot;</span>)</span><br><span class="line">  	timeline:node(empty)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">tostring</span>(timeline)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">return</span> framework</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在mw的模块中，整体返回的值应该是一个表（<code>return framework</code>），而调用的函数应该是这个表的表函数。</p>
+<p>在这个模块中，模板调用的便是表函数<code>timeline</code>。而整个模块实际上整体返回的值便是这个函数返回的值。</p>
+<p>在这里，调用函数中使用mw自带的<code>mw.html</code>模块创建html内容，然后整体转为字符串返回就可以了。</p>
+<p>那这个函数如何获取模板传入的参数呢？</p>
+<p>这个函数的参数只有一个<code>frame</code>，而这个东西实际上就是模板传入的整体信息。而<code>frame.args</code>便是传入的参数表。</p>
+<p>然而，这里却有一个很坑的点：</p>
+<blockquote>
+<p>出于性能考虑，frame.args 是一个元数据表，而不是一个真正的参数表。参数值是按需从 MediaWiki 请求的。这意味着大多数其他表格方法将无法正常工作，包括 #frame.args 、 next( frame.args ) 以及 Table 库中的函数。——官方文档</p>
+</blockquote>
+<p>这里如果尝试对<code>args</code>进行遍历，似乎是遍历不出来东西的。。。而这里显然并不需要考虑性能问题（因为所有的参数都迟早会被调用），所以这里使用<code>frame:getParent().args</code>来得到一个真正的参数表，这样就可以正常地进行遍历了。</p>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>最终这个模板已经在这个wiki站投入使用，虽然还有一些bug（如移动端可能的显示问题），但至少能用了，效果如置顶图所示。</p>
+<p><del>最终感想：css创始人，你睡了吗？我睡不着</del></p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+</article>
+    
+    
+
+<ul class="trm-post-copyright">
+    <li class="trm-post-copyright-author">
+        <strong>本文作者：</strong>
+        无名小卒
+    </li>
+    <li class="trm-post-copyright-link">
+        <strong>本文链接：</strong>
+        <a id="original-link" href="https://test.iqimi.top/2023/07/29/mw模块/" title="mediawiki之基于模块的模板">https://test.iqimi.top/2023/07/29/mw模块/</a>
+    </li>
+    <li class="trm-post-copyright-license">
+        <strong>版权声明：</strong>
+        本博客所有文章除特别声明外，均默认采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 ">CC BY-NC-SA 4.0</a> 许可协议。
+    </li>
+</ul>
+
+
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+    
+        <div class="col-lg-6">
+    <div class="trm-older-publications-card trm-scroll-animation trm-active-el" data-scroll="" data-scroll-offset="40">
+        <div class="trm-older-publication">
+            
+            <a class="trm-op-top trm-anima-link" href="/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/">
+                <span class="trm-op-cover">
+                    <img alt="cover" class="no-fancybox" src="/img/block.jpg">
+                </span>
+                <h6 class="trm-op-title">杀戮尖塔mod开发的二三事</h6>
+            </a>
+            <div class="trm-divider trm-mb-15 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/07/25</li>
+                <li>12:10</li>
+                <li>编程</li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+    
+
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container" data-scroll data-scroll-offset="50"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": 'qimi142857/mygiscus',
+            "data-repo-id": 'R_kgDOJ4Yr0g',
+            "data-category": 'General',
+            "data-category-id": 'DIC_kwDOJ4Yr0s4CXuCD',
+            "data-mapping": 'url',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'transparent_dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v7.0.0-rc1
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.9
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+    
+        <div class="trm-footer-item">
+            <a href="https://icp.gov.moe/?keyword=20221428" target="_blank">萌ICP备20221428号</a>
+        </div>
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("02/03/2022 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <i class="iconfont fas fa-book-reader"></i>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <i class="iconfont fas fa-arrows-alt-h"></i>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <i class="iconfont fas fa-arrow-up"></i>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+<script src="https://unpkg.com/swup@2.0.19/dist/swup.min.js"></script>
+
+    
+<script src="https://unpkg.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://unpkg.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/js/main.js?v=2.0.9"></script>
+
+</body>
+
+</html>

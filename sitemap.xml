@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://test.iqimi.top/2023/07/29/mw%E6%A8%A1%E5%9D%97/</loc>
+    
+    <lastmod>2023-07-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://test.iqimi.top/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/</loc>
     
     <lastmod>2023-07-25</lastmod>
@@ -166,57 +175,64 @@
 
   <url>
     <loc>https://test.iqimi.top/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://test.iqimi.top/tags/c/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <loc>https://test.iqimi.top/tags/python/</loc>
+    <lastmod>2023-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://test.iqimi.top/tags/mediawiki/</loc>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A%EF%BC%8Cc/</loc>
-    <lastmod>2023-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://test.iqimi.top/tags/python/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/tags/java/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://test.iqimi.top/tags/c/</loc>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -225,28 +241,28 @@
   
   <url>
     <loc>https://test.iqimi.top/categories/%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/categories/%E6%9E%B6%E7%A9%BA/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/categories/%E6%95%B0%E5%AD%A6/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://test.iqimi.top/categories/CTF/</loc>
-    <lastmod>2023-07-25</lastmod>
+    <lastmod>2023-07-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
