@@ -7,12 +7,12 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="description" content="杀戮尖塔mod开发的二三事注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（ 文中提到的人物mod还没有做完，暂缓更新。 开发过程准备本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。 由于没有任何相关的项目实践基础，我只能去参考一些相关的教程来了解如何开发。下面是我参考过的教程链接（中文）： 杀戮">
+<meta name="description" content="杀戮尖塔mod开发的二三事注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（ 文中提到的人物mod还没有做完，暂缓更新。 2023&#x2F;9&#x2F;14更新：此mod已经在创意工坊发布，且于今日增加了英文翻译。 开发过程准备本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。 由于没有任何相关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="杀戮尖塔mod开发的二三事">
 <meta property="og:url" content="https://test.iqimi.top/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/index.html">
 <meta property="og:site_name" content="无名小传">
-<meta property="og:description" content="杀戮尖塔mod开发的二三事注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（ 文中提到的人物mod还没有做完，暂缓更新。 开发过程准备本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。 由于没有任何相关的项目实践基础，我只能去参考一些相关的教程来了解如何开发。下面是我参考过的教程链接（中文）： 杀戮">
+<meta property="og:description" content="杀戮尖塔mod开发的二三事注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（ 文中提到的人物mod还没有做完，暂缓更新。 2023&#x2F;9&#x2F;14更新：此mod已经在创意工坊发布，且于今日增加了英文翻译。 开发过程准备本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。 由于没有任何相关">
 <meta property="og:locale">
 <meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
 <meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
 <meta property="og:image" content="https://test.iqimi.top/img/404.jpg">
 <meta property="article:published_time" content="2023-07-25T04:10:00.000Z">
-<meta property="article:modified_time" content="2023-07-25T10:39:45.392Z">
+<meta property="article:modified_time" content="2023-09-14T08:37:10.794Z">
 <meta property="article:author" content="无名小卒">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
@@ -69,7 +69,7 @@
 
 <!-- Variable -->
 <script>window.ASYNC_CONFIG = {"hostname":"test.iqimi.top","author":"无名小卒","root":"/","typed_text":null,"theme_version":"2.0.9","theme":{"switch":true,"default":"style-dark"},"favicon":{"logo":"/img/favicon.svg","icon16":"/img/favicon.svg","icon32":"/img/favicon.svg","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索文章...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":true,"plugin":{"flickr_justified_gallery":"https://unpkg.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"far fa-sun","moon":"far fa-moon","play":"fas fa-play","email":"far fa-envelope","next":"fas fa-arrow-right","calendar":"far fa-calendar-alt","clock":"far fa-clock","user":"far fa-user","back_top":"fas fa-arrow-up","close":"fas fa-times","search":"fas fa-search","reward":"fas fa-hand-holding-usd","user_tag":"fas fa-user-alt","toc_tag":"fas fa-th-list","read":"fas fa-book-reader","arrows":"fas fa-arrows-alt-h","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"font","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
-<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-07-25 18:39:45"};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-09-14 16:37:10"};</script>
 
 <!-- Theme mode css -->
 <link data-swup-theme rel="stylesheet" href="/css/index.css?v=2.0.9" id="trm-switch-style">
@@ -391,6 +391,7 @@
     <article id="article-container" class="trm-publication">
     <h1 id="杀戮尖塔mod开发的二三事"><a href="#杀戮尖塔mod开发的二三事" class="headerlink" title="杀戮尖塔mod开发的二三事"></a>杀戮尖塔mod开发的二三事</h1><p>注意：此文不是教程，只是个人的感想和体会。教程实际上也可以写，但是懒得写了（</p>
 <p>文中提到的人物mod还没有做完，暂缓更新。</p>
+<p>2023&#x2F;9&#x2F;14更新：此mod已经在创意工坊发布，且于今日增加了英文翻译。</p>
 <h2 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>本人对杀戮尖塔这款游戏的可拓展性早有耳闻，也玩过许许多多其他人开发的mod，于是就心血来潮想要自己开发一个杀戮尖塔的mod。</p>
 <p>由于没有任何相关的项目实践基础，我只能去参考一些相关的教程来了解如何开发。下面是我参考过的教程链接（中文）：</p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1415708635800080384">杀戮尖塔MOD制作 - 知乎 (zhihu.com)</a></p>
