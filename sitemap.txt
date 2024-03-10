@@ -1,4 +1,3 @@
-https://test.iqimi.top/2023/11/17/%E4%BC%8A%E5%B8%83%E4%B8%80/
 https://test.iqimi.top/2023/01/04/%E6%9D%A8%E6%9F%B3%E9%A3%8E/
 https://test.iqimi.top/2023/07/25/%E6%9D%80%E6%88%AE%E5%B0%96%E5%A1%94mod/
 https://test.iqimi.top/2023/07/29/mw%E6%A8%A1%E5%9D%97/
@@ -23,13 +22,11 @@ https://test.iqimi.top/tags/c/
 https://test.iqimi.top/tags/mediawiki/
 https://test.iqimi.top/tags/python/
 https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A%EF%BC%8Cc/
-https://test.iqimi.top/tags/%E4%BC%8A%E5%B8%83%E5%B8%9D%E5%9B%BD/
 https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E4%BA%8B%E4%BB%B6/
-https://test.iqimi.top/tags/java/
 https://test.iqimi.top/tags/%E6%9E%B6%E7%A9%BA-%E7%BB%84%E7%BB%87/
+https://test.iqimi.top/tags/java/
 https://test.iqimi.top/tags/%E4%BD%9C%E4%B8%9A/
 https://test.iqimi.top/categories/%E7%BC%96%E7%A8%8B/
-https://test.iqimi.top/categories/%E5%B0%8F%E8%AF%B4/
 https://test.iqimi.top/categories/%E6%9E%B6%E7%A9%BA/
 https://test.iqimi.top/categories/%E6%95%B0%E5%AD%A6/
 https://test.iqimi.top/categories/CTF/
